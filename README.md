@@ -67,6 +67,12 @@ bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** fi
 
 Then run the new extension in the **Monteux Automation Engine** via the command "my extension".
 
+An example **extension** is the Empty Stack one, which clears the **object stack** via the "empty stack" command in the **Monteux Automation Engine**,
+
+**Extension source code:** https://github.com/rovemonteux/automation_engine/blob/master/src/main/java/net/rovemonteux/automation/engine/tasks/EmptyStack.java
+
+**Vocabulary:** https://github.com/rovemonteux/automation_engine/blob/master/vocabularies/test_vocabulary.xml
+
 Author
 ======
 
