@@ -54,6 +54,7 @@ public class MyExtension implements TaskFactory {"
 
 bound as a Task by a custom **vocabulary**,
 
+```
 <term>
 <language>en</language>
 <value>my extension</value>
@@ -62,6 +63,7 @@ bound as a Task by a custom **vocabulary**,
 <description>Runs my custom extension</description>
 <package>my.package.name</package>
 </term>
+```
 
 Then runnable in the **Monteux Automation Engine** by the command "my extension".
 
