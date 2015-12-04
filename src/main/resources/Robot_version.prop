@@ -1,0 +1,3 @@
+version=${project.version}
+build.date=${timestamp}
+revision.number=${revisionnumber}

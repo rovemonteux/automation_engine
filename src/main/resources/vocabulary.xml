@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary>
+<term>
+<language>en</language>
+<value>stack free memory</value>
+<task mode="stack">FreeMemory</task>
+<threaded>false</threaded>
+<description>Puts the current free memory from the local machine in the stack</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>print free memory</value>
+<task mode="print">FreeMemory</task>
+<threaded>false</threaded>
+<description>Prints the free memory in the local machine from the stack</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>empty stack</value>
+<task mode="run">EmptyStack</task>
+<threaded>false</threaded>
+<description>Empties the object stack</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>list stack</value>
+<task mode="print">ListStack</task>
+<threaded>false</threaded>
+<description>Lists the contents of the object stack</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>stack demo</value>
+<task mode="run">EmptyStack</task>
+<task mode="print">ListStack</task>
+<task mode="stack">FreeMemory</task>
+<task mode="print">ListStack</task>
+<task mode="run">EmptyStack</task>
+<task mode="print">ListStack</task>
+<threaded>false</threaded>
+<description>Chained empty-list-add-list-empty-list stack demo</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+</vocabulary>

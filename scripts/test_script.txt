@@ -1,0 +1,3 @@
+stack free memory
+print free memory
+empty stack

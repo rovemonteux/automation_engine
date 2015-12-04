@@ -1,0 +1,4 @@
+stack free memory
+print free memory
+run free memory
+empty stack
