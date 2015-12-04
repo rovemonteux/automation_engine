@@ -45,7 +45,7 @@ Custom script containing commands to be run at the engine's initialization.
 Author
 ======
 
-* **Rove Monteux** - <http://rmonteux.wordpress.com/>, <https://www.linkedin.com/in/rovemonteux>
+* [Rove Monteux] - <http://rmonteux.wordpress.com/>, <https://www.linkedin.com/in/rovemonteux>
 
 License
 =======
