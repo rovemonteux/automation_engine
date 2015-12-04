@@ -52,7 +52,7 @@ package my.package.name;
 
 public class MyExtension implements TaskFactory {"
 
-bound as a Task by a custom **vocabulary**,
+bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** file,
 
 ```
 <term>
@@ -65,7 +65,7 @@ bound as a Task by a custom **vocabulary**,
 </term>
 ```
 
-Then runnable in the **Monteux Automation Engine** by the command "my extension".
+Then run the new extension in the **Monteux Automation Engine** via the command "my extension".
 
 Author
 ======
