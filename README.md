@@ -42,6 +42,29 @@ Custom vocabulary binding **Tasks** to commands, use 'builtin' or don't send the
 **-script**
 Custom script containing commands to be run at the engine's initialization.
 
+Extensions
+==========
+
+To extend the **Monteux Automation Engine**, simply write your own task, extending net.rovemonteux.automation.engine.tasks.TaskFactory, and bind it as a **Task** using a custom vocabulary, for example,
+
+"
+package my.package.name;
+
+public class MyExtension implements TaskFactory {"
+
+bound as a Task by a custom **vocabulary**,
+
+<term>
+<language>en</language>
+<value>my extension</value>
+<task mode="run">MyExtension</task>
+<threaded>false</threaded>
+<description>Runs my custom extension</description>
+<package>my.package.name</package>
+</term>
+
+Then runnable in the **Monteux Automation Engine** by the command "my extension".
+
 Author
 ======
 
