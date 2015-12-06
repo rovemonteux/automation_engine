@@ -33,12 +33,16 @@ Build
 
 For building the **Monteux Automation Engine**, you will need Maven. In the project folder, type
 
-  mvn package
+```
+mvn package
+```
   
 Usage
 =====
 
+```
 java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt
+```
 
 **-hid**
 Selects the desired **HID**, i.e. 'Console' for the interactive shell, 'Script' for the headless script interpreter.
@@ -54,10 +58,11 @@ Extensions
 
 To extend the **Monteux Automation Engine**, simply write your own task, extending net.rovemonteux.automation.engine.tasks.TaskFactory, and bind it as a **Task** using a custom vocabulary, for example,
 
-"
+```
 package my.package.name;
 
-public class MyExtension implements TaskFactory {"
+public class MyExtension implements TaskFactory {
+```
 
 bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** file,
 
