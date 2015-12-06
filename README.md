@@ -77,7 +77,38 @@ bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** fi
 </term>
 ```
 
-Then run the new extension in the **Monteux Automation Engine** via the command "my extension".
+Then run the new extension in the **Monteux Automation Engine** via the command "my extension" - the "run()" method of the class "MyExtension" will then be given access to the **Object Stack** and run in non-threaded mode.
+
+To run in threaded mode, in its own thread, change the threaded configuration tag from
+
+```
+<threaded>false</threaded>
+```
+
+to,
+
+```
+<threaded>true</threaded>
+```
+
+To run the "stack()" or "print()" methods, simply change the **mode** attribute in **task** accordingly.
+
+You can also chain tasks together to a single command, as in for example,
+
+```
+<term>
+<language>en</language>
+<value>my extension</value>
+<task mode="print">ShowStack</task>
+<task mode="stack">MyExtension</task>
+<task mode="print">MyExtension</task>
+<task mode="run">MyExtension</task>
+<task mode="print">ShowStack</task>
+<threaded>false</threaded>
+<description>Runs my custom extension</description>
+<package>my.package.name</package>
+</term>
+```
 
 An example **extension** is the Empty Stack one, which clears the **object stack** via the "empty stack" command in the **Monteux Automation Engine**,
 
