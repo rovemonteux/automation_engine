@@ -85,7 +85,7 @@ To run in threaded mode, in its own thread, change the threaded configuration ta
 <threaded>false</threaded>
 ```
 
-to,
+to
 
 ```
 <threaded>true</threaded>
