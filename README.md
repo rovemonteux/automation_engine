@@ -28,6 +28,13 @@ scripts to be included and trun at the engine's startup.
 **vocabularies/**
 vocabularies binding tasks to commands to be executed via scripts or interactively in the HIDs.
 
+Build
+=====
+
+For building the **Monteux Automation Engine**, you will need Maven. In the project folder, type
+
+  mvn package
+  
 Usage
 =====
 
