@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Automation engine by rovemonteux</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Automation engine</h1>
+        <h2>Monteux Automation Engine</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/rovemonteux/automation_engine/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/rovemonteux/automation_engine/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/rovemonteux/automation_engine" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="monteux-automation-engine" class="anchor" href="#monteux-automation-engine" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Monteux Automation Engine</strong>
+</h1>
+
+<p><strong>Monteux Automation Engine</strong> is a GPLed framework for Java SE 6 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a built-in shell and script interpreter.</p>
+
+<p>The automation is based on <strong>tasks lists</strong> and <strong>object stacks</strong>, interacting with the environment via <strong>HIDs</strong>. </p>
+
+<p><strong>Tasks</strong> are classes described in custom <strong>vocabularies</strong>, with three entry points: <strong>run</strong>, <strong>stack</strong> and <strong>print</strong>.</p>
+
+<p><strong>run</strong> runs a full cycle of the task, typically running, pushing the result into the stack, and pritning the result to the <strong>HID</strong> stream.</p>
+
+<p><strong>stack</strong> runs the task and pushes the result to the <strong>stack</strong>.</p>
+
+<p><strong>print</strong> runs the task and prints the result to the <strong>HID</strong> output stream.</p>
+
+<p><strong>Object Stack</strong> is an in-memory database of objects acting as a <strong>stack</strong>, with add, search, list, retrieve and clear functionalities. Objects in the <strong>stack</strong> are immediately available for all running <strong>tasks</strong>.</p>
+
+<p><strong>HID</strong>s are devices for interacting with the automation engine, such as <strong>Console</strong> for a Readline-enabled, interactive shell, and <strong>Script</strong> for a headless engine.</p>
+
+<p>Examples are included in the distribution, in the folders,</p>
+
+<p><strong>test/</strong>
+scripts for starting the engine.</p>
+
+<p><strong>scripts/</strong>
+scripts to be included and trun at the engine's startup.</p>
+
+<p><strong>vocabularies/</strong>
+vocabularies binding tasks to commands to be executed via scripts or interactively in the HIDs.</p>
+
+<h1>
+<a id="build" class="anchor" href="#build" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build</h1>
+
+<p>For building the <strong>Monteux Automation Engine</strong>, you will need Maven. In the project folder, type</p>
+
+<pre><code>mvn package
+</code></pre>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<pre><code>java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt
+</code></pre>
+
+<p><strong>-hid</strong>
+Selects the desired <strong>HID</strong>, i.e. 'Console' for the interactive shell, 'Script' for the headless script interpreter.</p>
+
+<p><strong>-vocabulary</strong>
+Custom vocabulary binding <strong>Tasks</strong> to commands, use 'builtin' or don't send the flag for no custom vocabulary.</p>
+
+<p><strong>-script</strong>
+Custom script containing commands to be run at the engine's initialization.</p>
+
+<h1>
+<a id="extensions" class="anchor" href="#extensions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extensions</h1>
+
+<p>To extend the <strong>Monteux Automation Engine</strong>, simply write your own task, extending net.rovemonteux.automation.engine.tasks.TaskFactory, and bind it as a <strong>Task</strong> using a custom vocabulary, for example,</p>
+
+<pre><code>package my.package.name;
+
+public class MyExtension implements TaskFactory {
+</code></pre>
+
+<p>bind it as a <strong>Task</strong> with a custom <strong>vocabulary</strong> term in the <strong>vocabulary</strong> file,</p>
+
+<pre><code>&lt;term&gt;
+&lt;language&gt;en&lt;/language&gt;
+&lt;value&gt;my extension&lt;/value&gt;
+&lt;task mode="run"&gt;MyExtension&lt;/task&gt;
+&lt;threaded&gt;false&lt;/threaded&gt;
+&lt;description&gt;Runs my custom extension&lt;/description&gt;
+&lt;package&gt;my.package.name&lt;/package&gt;
+&lt;/term&gt;
+</code></pre>
+
+<p>Then run the new extension in the <strong>Monteux Automation Engine</strong> via the command "my extension" - the "run()" method of the class "MyExtension" will then be given access to the <strong>Object Stack</strong> and run in non-threaded mode.</p>
+
+<p>To run in threaded mode, in its own thread, change the threaded configuration tag from</p>
+
+<pre><code>&lt;threaded&gt;false&lt;/threaded&gt;
+</code></pre>
+
+<p>to</p>
+
+<pre><code>&lt;threaded&gt;true&lt;/threaded&gt;
+</code></pre>
+
+<p>To run the "stack()" or "print()" methods, simply change the <strong>mode</strong> attribute in <strong>task</strong> accordingly.</p>
+
+<p>You can also chain tasks together to a single command, as in for example,</p>
+
+<pre><code>&lt;term&gt;
+&lt;language&gt;en&lt;/language&gt;
+&lt;value&gt;my extension&lt;/value&gt;
+&lt;task mode="print"&gt;ShowStack&lt;/task&gt;
+&lt;task mode="stack"&gt;MyExtension&lt;/task&gt;
+&lt;task mode="print"&gt;MyExtension&lt;/task&gt;
+&lt;task mode="run"&gt;MyExtension&lt;/task&gt;
+&lt;task mode="print"&gt;ShowStack&lt;/task&gt;
+&lt;threaded&gt;false&lt;/threaded&gt;
+&lt;description&gt;Runs my custom extension&lt;/description&gt;
+&lt;package&gt;my.package.name&lt;/package&gt;
+&lt;/term&gt;
+</code></pre>
+
+<p>An example <strong>extension</strong> is the Empty Stack one, which clears the <strong>object stack</strong> via the "empty stack" command in the <strong>Monteux Automation Engine</strong>,</p>
+
+<p><strong>Extension source code:</strong> <a href="https://github.com/rovemonteux/automation_engine/blob/master/src/main/java/net/rovemonteux/automation/engine/tasks/EmptyStack.java">https://github.com/rovemonteux/automation_engine/blob/master/src/main/java/net/rovemonteux/automation/engine/tasks/EmptyStack.java</a></p>
+
+<p><strong>Vocabulary:</strong> <a href="https://github.com/rovemonteux/automation_engine/blob/master/vocabularies/test_vocabulary.xml">https://github.com/rovemonteux/automation_engine/blob/master/vocabularies/test_vocabulary.xml</a></p>
+
+<h1>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h1>
+
+<ul>
+<li>[Rove Monteux] - <a href="https://rmonteux.wordpress.com/">https://rmonteux.wordpress.com/</a>, <a href="https://www.linkedin.com/in/rovemonteux">https://www.linkedin.com/in/rovemonteux</a>
+</li>
+</ul>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<h1>
+<a id="project-wiki" class="anchor" href="#project-wiki" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Wiki</h1>
+
+<ul>
+<li><a href="https://github.com/rovemonteux/automation_engine/wiki">https://github.com/rovemonteux/automation_engine/wiki</a></li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
