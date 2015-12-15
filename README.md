@@ -56,12 +56,12 @@ Custom script containing commands to be run at the engine's initialization.
 Extensions
 ==========
 
-To extend the **Monteux Automation Engine**, simply write your own task, extending net.rovemonteux.automation.engine.tasks.TaskFactory, and bind it as a **Task** using a custom vocabulary, for example,
+To extend the **Monteux Automation Engine**, simply write your own **Task**, extending net.rovemonteux.automation.engine.tasks.TaskFactory, and bind it as a **Task** using a custom vocabulary, for example,
 
 ```
 package my.package.name;
 
-public class MyExtension implements TaskFactory {
+public class MyExtension extends TaskFactory {
 ```
 
 bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** file,
