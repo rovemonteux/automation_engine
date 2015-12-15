@@ -28,10 +28,21 @@ scripts to be included and trun at the engine's startup.
 **vocabularies/**
 vocabularies binding tasks to commands to be executed via scripts or interactively in the HIDs.
 
+Build
+=====
+
+For building the **Monteux Automation Engine**, you will need Maven. In the project folder, type
+
+```
+mvn package
+```
+  
 Usage
 =====
 
+```
 java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt
+```
 
 **-hid**
 Selects the desired **HID**, i.e. 'Console' for the interactive shell, 'Script' for the headless script interpreter.
@@ -47,10 +58,11 @@ Extensions
 
 To extend the **Monteux Automation Engine**, simply write your own task, extending net.rovemonteux.automation.engine.tasks.extensions.TaskFactory, and bind it as a **Task** using a custom vocabulary, for example,
 
-"
+```
 package my.package.name;
 
-public class MyExtension implements TaskFactory {"
+public class MyExtension implements TaskFactory {
+```
 
 bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** file,
 
@@ -65,7 +77,38 @@ bind it as a **Task** with a custom **vocabulary** term in the **vocabulary** fi
 </term>
 ```
 
-Then run the new extension in the **Monteux Automation Engine** via the command "my extension".
+Then run the new extension in the **Monteux Automation Engine** via the command "my extension" - the "run()" method of the class "MyExtension" will then be given access to the **Object Stack** and run in non-threaded mode.
+
+To run in threaded mode, in its own thread, change the threaded configuration tag from
+
+```
+<threaded>false</threaded>
+```
+
+to
+
+```
+<threaded>true</threaded>
+```
+
+To run the "stack()" or "print()" methods, simply change the **mode** attribute in **task** accordingly.
+
+You can also chain tasks together to a single command, as in for example,
+
+```
+<term>
+<language>en</language>
+<value>my extension</value>
+<task mode="print">ShowStack</task>
+<task mode="stack">MyExtension</task>
+<task mode="print">MyExtension</task>
+<task mode="run">MyExtension</task>
+<task mode="print">ShowStack</task>
+<threaded>false</threaded>
+<description>Runs my custom extension</description>
+<package>my.package.name</package>
+</term>
+```
 
 An example **extension** is the Empty Stack one, which clears the **object stack** via the "empty stack" command in the **Monteux Automation Engine**,
 
