@@ -71,4 +71,12 @@
 <description>Runs a given script file</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>view file</value>
+<task mode="run">ViewFile</task>
+<threaded>false</threaded>
+<description>Views a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>

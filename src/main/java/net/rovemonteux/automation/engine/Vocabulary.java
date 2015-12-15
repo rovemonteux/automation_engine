@@ -62,6 +62,7 @@ public class Vocabulary {
 	/**
 	 * Populates the vocabulary memory, containing the relationship between the terms and strategies.
 	 * 
+	 * @param	inputStream	Input stream to read data from
 	 * @throws DOMException	Error with the DOM XML parser
 	 * @throws ParserConfigurationException	Error with the XML parser configuration
 	 * @throws SAXException	Error with the SAX XML parser

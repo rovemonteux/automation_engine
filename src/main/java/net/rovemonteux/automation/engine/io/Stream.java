@@ -32,6 +32,7 @@ public class Stream {
 	 * Converts an InputStream to String.
 	 * 
 	 * @param input	InputStream to be converted
+	 * @param encoding	Encoding to use
 	 * @return	Converted InputStream
 	 */
 	public static String InputToString(InputStream input, String encoding) {

@@ -47,6 +47,28 @@ java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.
 **-hid**
 Selects the desired **HID**, i.e. 'Console' for the interactive shell, 'Script' for the headless script interpreter.
 
+An example **Console HID** session started as root (**-hid Console**)looks like the following,
+
+```
+2015-12-15 13:50:44,528 INFO  [main] hid.Console (Console.java:59) - Console HID started
+2015-12-15 13:50:44,529 INFO  [main] hid.Console (Console.java:64) - Setting up the Console
+2015-12-15 13:50:44,530 INFO  [main] hid.Console (Console.java:66) - Set the Console as the system's console, starting up
+Console auto completion is enabled, type the first letter of the command, and then the <tab> key. A <tab> on its own lists all available commands. Command history is available by pressing the up and down keys.
+root@mae> list files 
+2015-12-15 13:50:49,516 DEBUG [main] tasks.ListFiles (ListFiles.java:72) - Listing folder .
+run_script_test.sh
+run_console_test_custom_vocabulary.sh
+run_script_test_custom_vocabulary.sh
+run_console_test.sh
+root@mae> view file run_console_test.sh
+java -jar ../target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary builtin -script ../scripts/test_script.txt
+root@mae> view file ../scripts/test_script.txt
+stack free memory
+print free memory
+empty stack
+root@mae> 
+```
+
 **-vocabulary**
 Custom vocabulary binding **Tasks** to commands, use 'builtin' or don't send the flag for no custom vocabulary.
 
