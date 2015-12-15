@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -303,6 +305,19 @@ public class FileIO {
      */
     public static String getFilename(String filename) {
         return new File(filename).getName();
+    }
+    
+    /**
+     * Returns a list of files in a given folder.
+     * 
+     * @param folder	Folder to get the files from
+     * @return	List of files
+     */
+    public static ArrayList<File> listFiles(String folder) {
+    	File file = new File(folder);
+    	ArrayList<File> files = new ArrayList<File>(Arrays.asList(file.listFiles()));
+    	file = null;
+    	return files;
     }
 
 }

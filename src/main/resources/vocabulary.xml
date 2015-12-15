@@ -45,4 +45,12 @@
 <description>Chained empty-list-add-list-empty-list stack demo</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>list files</value>
+<task mode="print">ListFiles</task>
+<threaded>true</threaded>
+<description>Lists the files in a given folder</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
