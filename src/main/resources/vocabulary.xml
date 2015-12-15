@@ -39,6 +39,8 @@
 <task mode="print">ListStack</task>
 <task mode="stack">FreeMemory</task>
 <task mode="print">ListStack</task>
+<task mode="stack">ListFiles</task>
+<task mode="print">ListStack</task>
 <task mode="run">EmptyStack</task>
 <task mode="print">ListStack</task>
 <threaded>false</threaded>
@@ -51,6 +53,14 @@
 <task mode="print">ListFiles</task>
 <threaded>true</threaded>
 <description>Lists the files in a given folder</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>stack files list</value>
+<task mode="stack">ListFiles</task>
+<threaded>false</threaded>
+<description>Puts a list of the files in a given folder in the stack</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
 </vocabulary>
