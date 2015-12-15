@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
+import net.rovemonteux.automation.engine.hid.Script;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 /**
@@ -40,18 +41,26 @@ public class RunScript extends TaskFactory {
 	
 	@Override
 	public void run(BufferedWriter output, String[] args, String description) throws IOException {
-		stack(output,args,description);
-		print(output,args,description);
+		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description);
+		script.setup();
+		if (args.length > 2) {
+			script.setScriptFile(args[2]);
+			script.run();
+		}
+		else {
+			logger.error("Please provide the name of the script to be run.");
+		}
+		script = null;
 	}
 
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
-		
+		run(output, args, description);
 	}
 
 	@Override
 	public void stack(BufferedWriter output, String[] args, String description) throws IOException {
-		
+		run(output, args, description);
 	}
 
 }

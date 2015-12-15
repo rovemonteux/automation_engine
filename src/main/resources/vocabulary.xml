@@ -63,4 +63,12 @@
 <description>Puts a list of the files in a given folder in the stack</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>run script</value>
+<task mode="run">RunScript</task>
+<threaded>false</threaded>
+<description>Runs a given script file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
