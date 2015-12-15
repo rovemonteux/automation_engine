@@ -79,4 +79,12 @@
 <description>Views a given file</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>delete file</value>
+<task mode="run">DeleteFile</task>
+<threaded>false</threaded>
+<description>Deletes a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
