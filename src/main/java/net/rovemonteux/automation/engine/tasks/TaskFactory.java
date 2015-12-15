@@ -25,10 +25,48 @@ import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 public interface TaskFactory {
 
+	/**
+	 * Runs the Task. Run generically implies to both stack and print the Task in sequence.
+	 * 
+	 * @param output	Output stream
+	 * @param args	Extra arguments to the Task
+	 * @param description	Task description
+	 * @throws IOException	Error on input and output
+	 */
 	public void run(BufferedWriter output, String[] args, String description) throws IOException;
+	
+	/**
+	 * Prints the result object of the Task and/or write the result of operations to the output stream.
+	 * 
+	 * @param output	Output stream
+	 * @param args	Extra arguments to the Task
+	 * @param description	Task description
+	 * @throws IOException	Error on input and output
+	 */
 	public void print(BufferedWriter output, String[] args, String description) throws IOException;
+	
+	/**
+	 * Stacks the result object of the Task.
+	 * 
+	 * @param output	Output stream
+	 * @param args	Extra arguments to the Task
+	 * @param description	Task description
+	 * @throws IOException	Error on input and output
+	 */
 	public void stack(BufferedWriter output, String[] args, String description) throws IOException;
+	
+	/**
+	 * Returns the current Automation Engine Object Stack.
+	 * 
+	 * @return	Object Stack
+	 */
 	public ObjectStack getObjectStack_();
+	
+	/**
+	 * Sets the current Automation Engine Object Stack.
+	 * 
+	 * @param objectStack_	Object Stack to be set
+	 */
 	public void setObjectStack_(ObjectStack objectStack_);
 	
 }
