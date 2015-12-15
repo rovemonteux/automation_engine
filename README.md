@@ -47,7 +47,7 @@ java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.
 **-hid**
 Selects the desired **HID**, i.e. 'Console' for the interactive shell, 'Script' for the headless script interpreter.
 
-An example **Console HID** session started as root (**-hid Console**)looks like the following,
+The below snippet is an example **Console HID** session started as root with the **-hid Console**,
 
 ```
 2015-12-15 13:50:44,528 INFO  [main] hid.Console (Console.java:59) - Console HID started
@@ -66,7 +66,15 @@ root@mae> view file ../scripts/test_script.txt
 stack free memory
 print free memory
 empty stack
-root@mae> 
+root@mae> run script ../scripts/test_script.txt
+2015-12-15 13:58:37,841 INFO  [main] hid.Script (Script.java:52) - Script HID started
+2015-12-15 13:58:37,842 INFO  [main] hid.Script (Script.java:65) - Executing script /usr/development/rove/automation_engine/test/../scripts/test_script.txt
+2015-12-15 13:58:37,843 INFO  [main] io.LoggingOutputStream (LoggingOutputStream.java:125) - Free memory: 106609496
+
+2015-12-15 13:58:37,844 INFO  [main] io.LoggingOutputStream (LoggingOutputStream.java:125) - Emptied the object stack.
+
+2015-12-15 13:58:37,844 INFO  [main] hid.Script (Script.java:69) - Executed script /usr/development/rove/automation_engine/test/../scripts/test_script.txt
+root@mae>
 ```
 
 **-vocabulary**
