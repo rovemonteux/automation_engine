@@ -131,7 +131,7 @@ public class Console implements HIDFactory {
 		ArrayList<String> associatedMode = results.get(1);
 		if (associatedClass.size() > 0) {
 			for (int i=0; i<associatedMode.size(); i++) {
-				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i));
+				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary());
 				runner.process();
 			}
 		}

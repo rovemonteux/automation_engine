@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.exception.StackTrace;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
@@ -38,8 +39,9 @@ public class TaskRunner extends Thread {
 	private ArrayList<String> taskProperties = new ArrayList<String>();
 	private BufferedWriter output = null;
 	private ObjectStack objectStack = null;
+	private Vocabulary vocabulary = null;
 	
-	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_) {
+	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_, Vocabulary vocabulary_) {
 		this.setTaskClassName(taskClassName_);
 		for (String taskProperty: taskProperties_.split("\\|")) {
 			this.getTaskProperties().add(taskProperty);
@@ -48,6 +50,7 @@ public class TaskRunner extends Thread {
 		this.setOutput(output_);
 		this.setObjectStack(objectStack_);
 		this.setMode(mode_);
+		this.setVocabulary(vocabulary_);
 	}
 	
 	public void process() {
@@ -62,8 +65,8 @@ public class TaskRunner extends Thread {
 	public void runTask() {
 		try {
 			Class<?> taskClass = Class.forName(this.getTaskProperties().get(3)+"."+taskClassName);
-			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class);
-			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack());
+			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class);
+			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary());
 			if (this.getMode().equals("") || this.getMode().toLowerCase().equals("run")) {
 				task.run(output, this.arguments, this.getTaskProperties().get(2));
 			}
@@ -130,6 +133,14 @@ public class TaskRunner extends Thread {
 
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	public Vocabulary getVocabulary() {
+		return vocabulary;
+	}
+
+	public void setVocabulary(Vocabulary vocabulary_) {
+		this.vocabulary = vocabulary_;
 	}
 	
 }

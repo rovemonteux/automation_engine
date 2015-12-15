@@ -21,10 +21,19 @@ package net.rovemonteux.automation.engine.tasks;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
-public interface TaskFactory {
+public abstract class TaskFactory {
 
+	private ObjectStack objectStack = null;
+	private Vocabulary vocabulary = null;
+	
+	public TaskFactory(ObjectStack objectStack_, Vocabulary vocabulary_) {
+		this.setObjectStack(objectStack_);
+		this.setVocabulary(vocabulary_);
+	}
+	
 	/**
 	 * Runs the Task. Run generically implies to both stack and print the Task in sequence.
 	 * 
@@ -33,7 +42,9 @@ public interface TaskFactory {
 	 * @param description	Task description
 	 * @throws IOException	Error on input and output
 	 */
-	public void run(BufferedWriter output, String[] args, String description) throws IOException;
+	public void run(BufferedWriter output, String[] args, String description) throws IOException {
+		
+	}
 	
 	/**
 	 * Prints the result object of the Task and/or write the result of operations to the output stream.
@@ -43,7 +54,9 @@ public interface TaskFactory {
 	 * @param description	Task description
 	 * @throws IOException	Error on input and output
 	 */
-	public void print(BufferedWriter output, String[] args, String description) throws IOException;
+	public void print(BufferedWriter output, String[] args, String description) throws IOException {
+		
+	}
 	
 	/**
 	 * Stacks the result object of the Task.
@@ -53,20 +66,44 @@ public interface TaskFactory {
 	 * @param description	Task description
 	 * @throws IOException	Error on input and output
 	 */
-	public void stack(BufferedWriter output, String[] args, String description) throws IOException;
+	public void stack(BufferedWriter output, String[] args, String description) throws IOException {
+		
+	}
 	
 	/**
 	 * Returns the current Automation Engine Object Stack.
 	 * 
 	 * @return	Object Stack
 	 */
-	public ObjectStack getObjectStack_();
+	public ObjectStack getObjectStack() {
+		return this.objectStack;
+	}
 	
 	/**
 	 * Sets the current Automation Engine Object Stack.
 	 * 
 	 * @param objectStack_	Object Stack to be set
 	 */
-	public void setObjectStack_(ObjectStack objectStack_);
+	public void setObjectStack(ObjectStack objectStack_) {
+		this.objectStack = objectStack_;
+	}
+	
+	/**
+	 * Returns the current Vocabulary.
+	 * 
+	 * @return	Vocabulary
+	 */
+	public Vocabulary getVocabulary() {
+		return this.vocabulary;
+	}
+	
+	/**
+	 * Sets the current Vocabulary.
+	 * 
+	 * @param vocabulary_	Vocabulary to be set
+	 */
+	public void setVocabulary(Vocabulary vocabulary_) {
+		this.vocabulary = vocabulary_;
+	}
 	
 }
