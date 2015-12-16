@@ -44,7 +44,7 @@ public class RunScript extends TaskFactory {
 		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description);
 		script.setup();
 		if (args.length > 2) {
-			script.setScriptFile(args[2]);
+			script.setScriptFile(args[args.length-1]);
 			script.run();
 		}
 		else {

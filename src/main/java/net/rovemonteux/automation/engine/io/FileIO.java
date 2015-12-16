@@ -327,6 +327,26 @@ public class FileIO {
 		return true;
 	}
     
+	/**
+	 * Gets the size of a file.
+	 * 
+	 * @param sourceFile	File to get the size from
+	 * @return	File size
+	 */
+	public static long size(String sourceFile) {
+		File file = new File(sourceFile);
+		if (file.exists()) {
+			long result = file.length();
+			file = null;
+			return result;
+		}
+		else {
+			file = null;
+			logger.error("File "+sourceFile+" does not exists.");
+			return 0;
+		}
+	}
+	
     /**
      * Reads the data from a file in disk.
      * 

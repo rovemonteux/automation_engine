@@ -61,9 +61,9 @@ public class ViewFile extends TaskFactory {
 	public String viewFile(String[] args) {
 		if (args.length > 2) {
 			try {
-				return FileIO.read(args[2]);
+				return FileIO.read(args[args.length-1]);
 			} catch (FileNotFoundException e) {
-				logger.error("No such file exists, '"+args[2]+"'.");
+				logger.error("No such file exists, '"+args[args.length-1]+"'.");
 				e.printStackTrace();
 				return null;
 			}

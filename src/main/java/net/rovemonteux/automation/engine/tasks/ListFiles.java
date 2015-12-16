@@ -67,7 +67,7 @@ public class ListFiles extends TaskFactory {
 		StringBuilder result = new StringBuilder();
 		String folder = ".";
 		if (args.length > 2) {
-			folder = args[2];
+			folder = args[args.length-1];
 		}
 		logger.debug("Listing folder "+folder);
 		for (File file: FileIO.listFiles(folder)) {

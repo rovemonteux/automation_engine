@@ -95,4 +95,12 @@
 <description>Copies a given file to another given file</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>file size</value>
+<task mode="run">FileSize</task>
+<threaded>false</threaded>
+<description>Gets the size of a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>

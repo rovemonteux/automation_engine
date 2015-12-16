@@ -47,10 +47,10 @@ public class CopyFile extends TaskFactory {
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
 		if (copyFile(args)) {
-			output.write("File "+args[2]+" has been successfully copied to "+args[3]+".");
+			output.write("File "+args[args.length-2]+" has been successfully copied to "+args[args.length-1]+".");
 		}
 		else {
-			output.write("Failed copying file "+args[2]+" to "+args[3]+".");
+			output.write("Failed copying file "+args[args.length-2]+" to "+args[args.length-1]+".");
 		}
 		output.write(String.format("%n"));
 		output.flush();
@@ -63,12 +63,12 @@ public class CopyFile extends TaskFactory {
 	
 	public boolean copyFile(String[] args) {
 		if (args.length > 3) {
-			boolean result = FileIO.copy(args[2], args[3]);
+			boolean result = FileIO.copy(args[args.length-2], args[args.length-1]);
 			if (result) {
-				logger.debug("Copied "+args[2]+" to "+args[3]);
+				logger.debug("Copied "+args[args.length-2]+" to "+args[args.length-1]);
 			}
 			else {
-				logger.error("Failed copying "+args[2]+" to "+args[3]);
+				logger.error("Failed copying "+args[args.length-2]+" to "+args[args.length-1]);
 			}
 			return result;
 		}
