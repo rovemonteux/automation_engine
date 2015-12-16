@@ -19,7 +19,6 @@
 package net.rovemonteux.automation.engine.tasks;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,47 +29,52 @@ import net.rovemonteux.automation.engine.io.FileIO;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 /**
- * Displays a given file.
+ * Copies a given file to another given file.
  */
-public class ViewFile extends TaskFactory {
+public class CopyFile extends TaskFactory {
 
-	private static final Logger logger = LogManager.getLogger("ViewFile");
+	private static final Logger logger = LogManager.getLogger("CopyFile");
 	
-	public ViewFile(ObjectStack objectStack_, Vocabulary vocabulary_) {
+	public CopyFile(ObjectStack objectStack_, Vocabulary vocabulary_) {
 		super(objectStack_, vocabulary_);
 	}
 	
 	@Override
 	public void run(BufferedWriter output, String[] args, String description) throws IOException {
-		print(output, args, description);
-		stack(output, args, description);
+		copyFile(args);
 	}
 	
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
-		output.write(viewFile(args));
+		if (copyFile(args)) {
+			output.write("File "+args[2]+" has been successfully copied to "+args[3]+".");
+		}
+		else {
+			output.write("Failed copying file "+args[2]+" to "+args[3]+".");
+		}
 		output.write(String.format("%n"));
 		output.flush();
 	}
-
+	
 	@Override
 	public void stack(BufferedWriter output, String[] args, String description) throws IOException {
-		this.getObjectStack().add(viewFile(args));
+		this.getObjectStack().add(copyFile(args));
 	}
 	
-	public String viewFile(String[] args) {
-		if (args.length > 2) {
-			try {
-				return FileIO.read(args[2]);
-			} catch (FileNotFoundException e) {
-				logger.error("No such file exists, '"+args[2]+"'.");
-				e.printStackTrace();
-				return null;
+	public boolean copyFile(String[] args) {
+		if (args.length > 3) {
+			boolean result = FileIO.copy(args[2], args[3]);
+			if (result) {
+				logger.debug("Copied "+args[2]+" to "+args[3]);
 			}
+			else {
+				logger.error("Failed copying "+args[2]+" to "+args[3]);
+			}
+			return result;
 		}
 		else {
-			logger.error("Please specify a file to be viewed.");
-			return null;
+			logger.error("Please specify a file to be copied, and a destination file.");
+			return false;
 		}
 	}
 }

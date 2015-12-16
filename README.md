@@ -74,7 +74,25 @@ root@mae> run script ../scripts/test_script.txt
 2015-12-15 13:58:37,844 INFO  [main] io.LoggingOutputStream (LoggingOutputStream.java:125) - Emptied the object stack.
 
 2015-12-15 13:58:37,844 INFO  [main] hid.Script (Script.java:69) - Executed script /usr/development/rove/automation_engine/test/../scripts/test_script.txt
-root@mae>
+root@mae> list files 
+2015-12-16 08:39:54,127 DEBUG [main] tasks.ListFiles (ListFiles.java:72) - Listing folder .
+run_script_test.sh
+run_console_test_custom_vocabulary.sh
+run_script_test_custom_vocabulary.sh
+run_console_test.sh
+root@mae> copy file run_console_test.sh run_console_test.sh.copy
+2015-12-16 08:40:03,412 DEBUG [main] tasks.CopyFile (CopyFile.java:68) - Copied run_console_test.sh to run_console_test.sh.copy
+File run_console_test.sh has been successfully copied to run_console_test.sh.copy.
+root@mae> list files
+2015-12-16 08:40:25,621 DEBUG [main] tasks.ListFiles (ListFiles.java:72) - Listing folder .
+run_script_test.sh
+run_console_test_custom_vocabulary.sh
+run_console_test.sh.copy
+run_script_test_custom_vocabulary.sh
+run_console_test.sh
+root@mae> delete file run_console_test.sh.copy
+2015-12-16 08:41:32,153 DEBUG [main] tasks.DeleteFile (DeleteFile.java:60) - Deleted file run_console_test.sh.copy.
+root@mae> 
 ```
 
 **-vocabulary**

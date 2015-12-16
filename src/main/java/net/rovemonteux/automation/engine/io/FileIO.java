@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -252,9 +253,9 @@ public class FileIO {
      * @see File
      */
     public static void createFolder(String foldername) {
-        File f = new File(foldername);
-        f.mkdirs();
-        f = null;
+        File file = new File(foldername);
+        file.mkdirs();
+        file = null;
     }
 
     /**
@@ -265,11 +266,11 @@ public class FileIO {
      * @throws IOException	An input and output error
      */
     public static void copyFolderRecursively(String sourceFolderPath, String destinationFolderPath) throws IOException {
-        File f = new File(sourceFolderPath);
-        if (!f.isDirectory()) return;
+        File file = new File(sourceFolderPath);
+        if (!file.isDirectory()) return;
         if (!destinationFolderPath.endsWith(File.separator)) destinationFolderPath += File.separator;
 
-        for (final File fileEntry : f.listFiles()) {
+        for (final File fileEntry : file.listFiles()) {
             if (fileEntry.isDirectory()) {
                 copyFolderRecursively(fileEntry.getAbsolutePath(), destinationFolderPath + fileEntry.getName());
             } else {
@@ -279,6 +280,53 @@ public class FileIO {
         }
     }
 
+    /**
+     * Copies a given file to another given file.
+     * 
+     * @param sourceFile	File to copy from
+     * @param destinationFile	File to copy to
+     * @return Boolean indicating the success or failure of the file copy
+     */
+	public static boolean copy(String sourceFile, String destinationFile) {
+		FileChannel source = null;
+		FileChannel destination = null;
+		FileInputStream sourceStream = null;
+		FileOutputStream destinationStream = null;
+		try {
+			sourceStream = new FileInputStream(sourceFile);
+			source = sourceStream.getChannel();
+			destinationStream = new FileOutputStream(destinationFile);
+			destination = destinationStream.getChannel();
+			destination.transferFrom(source, 0, source.size());
+		} catch (Exception e) {
+			logger.error("Error copying file: "+e.getLocalizedMessage());
+			logger.error(e);
+			return false;
+		} finally {
+			if (source != null) {
+				try {
+					source.close();
+					sourceStream.close();
+					source = null;
+					sourceStream = null;
+				} catch (IOException e) {
+					logger.error(e);
+				}
+			}
+			if (destination != null) {
+				try {
+					destination.close();
+					destinationStream.close();
+					destination = null;
+					destinationStream = null;
+				} catch (IOException e) {
+					logger.error(e);
+				}
+			}
+		}
+		return true;
+	}
+    
     /**
      * Reads the data from a file in disk.
      * 

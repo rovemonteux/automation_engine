@@ -28,6 +28,9 @@ import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.io.FileIO;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
+/**
+ * Deletes a given file.
+ */
 public class DeleteFile extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("DeleteFile");
