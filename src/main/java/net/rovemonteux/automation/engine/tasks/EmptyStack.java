@@ -13,8 +13,8 @@ public class EmptyStack extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("EmptyStack");
 
-	public EmptyStack(ObjectStack objectStack_, Vocabulary vocabulary_) {
-		super(objectStack_, vocabulary_);
+	public EmptyStack(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+		super(objectStack_, vocabulary_, language_);
 	}
 	
 	@Override

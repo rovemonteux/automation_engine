@@ -36,8 +36,8 @@ public class ListFiles extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("ListFiles");
 	
-	public ListFiles(ObjectStack objectStack_, Vocabulary vocabulary_) {
-		super(objectStack_, vocabulary_);
+	public ListFiles(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+		super(objectStack_, vocabulary_, language_);
 	}
 	
 	@Override

@@ -45,7 +45,7 @@ public interface HIDFactory {
 	 * 
 	 * @param task	Task to be run
 	 */
-	public void processTask(String task);
+	public void processTask(String task, String language);
 	
 	/**
 	 * Gets the parsed rule set of tasks and modes.

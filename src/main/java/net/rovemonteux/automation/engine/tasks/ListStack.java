@@ -14,8 +14,8 @@ public class ListStack extends TaskFactory {
 	private static final Logger logger = LogManager.getLogger("ListStack");
 	private ObjectStack objectStack = null;
 	
-	public ListStack(ObjectStack objectStack_, Vocabulary vocabulary_) {
-		super(objectStack_, vocabulary_);
+	public ListStack(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+		super(objectStack_, vocabulary_, language_);
 	}
 	
 	@Override

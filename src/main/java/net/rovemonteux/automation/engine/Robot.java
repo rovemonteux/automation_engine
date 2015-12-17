@@ -52,6 +52,9 @@ public class Robot {
 	@Option(name="-script",usage="Execution script file name")
     private String script = "";
 	
+	@Option(name="-language",usage="Language code")
+    private String language = "en";
+	
 	@Argument
     private List<String> arguments = new ArrayList<String>();
 	
@@ -60,7 +63,7 @@ public class Robot {
 		try {
 			CmdLineParser parser = new CmdLineParser(robot);
 			parser.parseArgument(args);
-			robot.startup(robot.hid, robot.vocabulary, robot.script);
+			robot.startup(robot.hid, robot.vocabulary, robot.script, robot.language);
 		}
 		catch (Exception e) {
 			logger.error(StackTrace.asString(e));
@@ -69,13 +72,13 @@ public class Robot {
 	}
 
 	public static String usage() {
-		return "Usage: Robot -hid <HID mode> -vocabulary <vocabulary file> -script <script file>\n<HID mode> is the Human Interaction mode, i.e. Console, Script\n<vocabulary file> is an XML file containg the custom vocabulary rules. Specifiy 'builtin' to use the default bundled vocabulary.\n<script file> is a file containg command to be executed in the HID upon startup.";
+		return "Usage: Robot -hid <HID mode> -vocabulary <vocabulary file> -script <script file> -language <language code>\n<HID mode> is the Human Interaction mode, i.e. 'Console', 'Script'\n<vocabulary file> is an XML file containg the custom vocabulary rules. Specifiy 'builtin' to use the default bundled vocabulary.\n<script file> is a file containg command to be executed in the HID upon startup.\n<language code> is the language to be used for commands and messages, i.e. 'en' for English (default) and 'pt' for Portuguese.";
 	}
 	
-	public void startup(String hidInterface, String vocabularyFile, String scriptFile) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, DOMException, ParserConfigurationException, SAXException, IOException {
+	public void startup(String hidInterface, String vocabularyFile, String scriptFile, String languageCode) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, DOMException, ParserConfigurationException, SAXException, IOException {
 		Vocabulary vocabulary = new Vocabulary(vocabularyFile);
 		ObjectStack objectStack = new ObjectStack();
-		HID hid = new HID(hidInterface, vocabulary, objectStack, scriptFile);
+		HID hid = new HID(hidInterface, vocabulary, objectStack, scriptFile, languageCode);
 		HIDFactory hidFactory = HIDFactory.class.cast(hid.getHidClass());
 		hidFactory.setup();
 		hidFactory.run();

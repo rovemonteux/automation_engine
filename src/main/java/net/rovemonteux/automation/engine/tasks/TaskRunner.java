@@ -40,8 +40,9 @@ public class TaskRunner extends Thread {
 	private BufferedWriter output = null;
 	private ObjectStack objectStack = null;
 	private Vocabulary vocabulary = null;
+	private String language = null;
 	
-	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_, Vocabulary vocabulary_) {
+	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_, Vocabulary vocabulary_, String language_) {
 		this.setTaskClassName(taskClassName_);
 		for (String taskProperty: taskProperties_.split("\\|")) {
 			this.getTaskProperties().add(taskProperty);
@@ -51,6 +52,7 @@ public class TaskRunner extends Thread {
 		this.setObjectStack(objectStack_);
 		this.setMode(mode_);
 		this.setVocabulary(vocabulary_);
+		this.setLanguage(language_);
 	}
 	
 	public void process() {
@@ -65,8 +67,8 @@ public class TaskRunner extends Thread {
 	public void runTask() {
 		try {
 			Class<?> taskClass = Class.forName(this.getTaskProperties().get(3)+"."+taskClassName);
-			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class);
-			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary());
+			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class, String.class);
+			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary(), this.getLanguage());
 			if (this.getMode().equals("") || this.getMode().toLowerCase().equals("run")) {
 				task.run(output, this.arguments, this.getTaskProperties().get(2));
 			}
@@ -141,6 +143,14 @@ public class TaskRunner extends Thread {
 
 	public void setVocabulary(Vocabulary vocabulary_) {
 		this.vocabulary = vocabulary_;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	
 }

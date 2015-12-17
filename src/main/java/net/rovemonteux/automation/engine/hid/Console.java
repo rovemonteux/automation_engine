@@ -51,11 +51,13 @@ public class Console implements HIDFactory {
 	private Vocabulary vocabulary = null;
 	private ObjectStack objectStack = null;
 	private String scriptFile = "";
+	private String languageCode = "";
 	
-	public Console(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_) {
+	public Console(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_) {
 		this.setVocabulary(vocabulary_);
 		this.setObjectStack(objectStack_);
 		this.setScriptFile(scriptFile_);
+		this.setLanguageCode(languageCode_);
 		logger.info("Console HID started");
 	}
 	
@@ -73,7 +75,7 @@ public class Console implements HIDFactory {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");
 				logger.info("Executing script "+new File(this.getScriptFile()).getAbsolutePath());
 				for (String scriptEntry: script) {
-					processTask(scriptEntry);
+					processTask(scriptEntry, this.getLanguageCode());
 				}
 				logger.info("Executed script "+new File(this.getScriptFile()).getAbsolutePath());
 			}
@@ -107,7 +109,7 @@ public class Console implements HIDFactory {
                  reader.clearScreen();
              }
 			 else {
-				 processTask(result);
+				 processTask(result, this.getLanguageCode());
 			 }
 		}
 	}
@@ -116,22 +118,22 @@ public class Console implements HIDFactory {
 		this.getConsole().writer().write("Available commands: "+String.format("%n"));
 		this.getConsole().writer().write("clear - Clears the screen"+String.format("%n"));
 		this.getConsole().writer().write("exit - Exits the automation engine"+String.format("%n"));
-		this.getConsole().writer().write(this.getVocabulary().listAvailableTasks());
+		this.getConsole().writer().write(this.getVocabulary().listAvailableTasks(this.getLanguageCode()));
 		this.getConsole().flush();
 	}
 	
 	@Override
-	public void processTask(String task) {
+	public void processTask(String task, String language) {
 		if (!(task.equals("exit"))) {
 			if (task.equals("help")) {
 				list();
 			} else {
-		List<ArrayList<String>> results = this.getVocabulary().search(task);
+		List<ArrayList<String>> results = this.getVocabulary().search(task, language);
 		ArrayList<String> associatedClass = results.get(0);
 		ArrayList<String> associatedMode = results.get(1);
 		if (associatedClass.size() > 0) {
 			for (int i=0; i<associatedMode.size(); i++) {
-				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary());
+				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary(), this.getLanguageCode());
 				runner.process();
 			}
 		}
@@ -182,6 +184,14 @@ public class Console implements HIDFactory {
 	@Override
 	public String getScriptFile() {		
 		return this.scriptFile;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
 	}
 	
 }

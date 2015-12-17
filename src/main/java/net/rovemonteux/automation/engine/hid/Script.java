@@ -44,11 +44,13 @@ public class Script implements HIDFactory {
 	private Vocabulary vocabulary = null;
 	private ObjectStack objectStack = null;
 	private String scriptFile = "";
+	private String languageCode = "";
 	
-	public Script(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_) {
+	public Script(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_) {
 		this.setVocabulary(vocabulary_);
 		this.setObjectStack(objectStack_);
 		this.setScriptFile(scriptFile_);
+		this.setLanguageCode(languageCode_);
 		logger.info("Script HID started");
 	}
 	
@@ -64,7 +66,7 @@ public class Script implements HIDFactory {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");
 				logger.info("Executing script "+new File(this.getScriptFile()).getAbsolutePath());
 				for (String scriptEntry: script) {
-					processTask(scriptEntry);
+					processTask(scriptEntry, this.getLanguageCode());
 				}
 				logger.info("Executed script "+new File(this.getScriptFile()).getAbsolutePath());
 			}
@@ -76,13 +78,13 @@ public class Script implements HIDFactory {
 	}
 
 	@Override
-	public void processTask(String task) {
-		List<ArrayList<String>> results = vocabulary.search(task);
+	public void processTask(String task, String language) {
+		List<ArrayList<String>> results = vocabulary.search(task, language);
 		ArrayList<String> associatedClass = results.get(0);
 		ArrayList<String> associatedMode = results.get(1);
 		if (associatedClass.size() > 0) {
 			for (int i=0; i<associatedMode.size(); i++) {
-				TaskRunner runner = new TaskRunner(new BufferedWriter(new OutputStreamWriter(new LoggingOutputStream(logger, Level.INFO))), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary());
+				TaskRunner runner = new TaskRunner(new BufferedWriter(new OutputStreamWriter(new LoggingOutputStream(logger, Level.INFO))), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary(), this.getLanguageCode());
 				runner.process();
 			}
 		}
@@ -122,6 +124,14 @@ public class Script implements HIDFactory {
 	@Override
 	public String getScriptFile() {
 		return this.scriptFile;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }

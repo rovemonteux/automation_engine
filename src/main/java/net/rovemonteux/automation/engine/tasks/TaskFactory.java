@@ -28,10 +28,12 @@ public abstract class TaskFactory {
 
 	private ObjectStack objectStack = null;
 	private Vocabulary vocabulary = null;
+	private String language = null;
 	
-	public TaskFactory(ObjectStack objectStack_, Vocabulary vocabulary_) {
+	public TaskFactory(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
 		this.setObjectStack(objectStack_);
 		this.setVocabulary(vocabulary_);
+		this.setLanguage(language_);
 	}
 	
 	/**
@@ -104,6 +106,14 @@ public abstract class TaskFactory {
 	 */
 	public void setVocabulary(Vocabulary vocabulary_) {
 		this.vocabulary = vocabulary_;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	
 }

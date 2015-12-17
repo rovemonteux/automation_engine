@@ -1,7 +1,7 @@
 **Monteux Automation Engine**
 ====================
 
-**Monteux Automation Engine** is a GPLed framework for Java SE 6 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a built-in shell and script interpreter.
+**Monteux Automation Engine** is a GPLed framework for Java SE 6 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a localized built-in shell and script interpreter.
 
 The automation is based on **tasks lists** and **object stacks**, interacting with the environment via **HIDs**. 
 
@@ -41,7 +41,7 @@ Usage
 =====
 
 ```
-java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt
+java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt -language en
 ```
 
 **-hid**
@@ -100,6 +100,9 @@ Custom vocabulary binding **Tasks** to commands, use 'builtin' or don't send the
 
 **-script**
 Custom script containing commands to be run at the engine's initialization.
+
+**-language**
+Language code to use for commands and messages, i.e. '-language en' for English (default), and '-language pt' for Portuguese. 
 
 Extensions
 ==========

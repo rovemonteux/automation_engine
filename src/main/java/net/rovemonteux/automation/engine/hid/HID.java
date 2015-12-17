@@ -34,16 +34,18 @@ public class HID {
 	
 	private String hidInterfaceName = "";
 	private String scriptFile = "";
+	private String languageCode = "";
 	private Method startupMethod = null;
 	private Object hidClass = null;
 	private Vocabulary vocabulary = null;
 	private ObjectStack objectStack = null;
 	
-	public HID(String hidInterfaceName_, Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
+	public HID(String hidInterfaceName_, Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 		this.setObjectStack(objectStack_);
 		this.setHidInterfaceName("net.rovemonteux.automation.engine.hid."+hidInterfaceName_);
 		this.setScriptFile(scriptFile_);
 		this.setVocabulary(vocabulary_);
+		this.setLanguageCode(languageCode_);
 		Class<?> driverClass = Class.forName(this.getHidInterfaceName());
 		Class[] argumentTypes = new Class[] { };
 		this.setStartupMethod(driverClass.getDeclaredMethod("setup"));
@@ -52,8 +54,8 @@ public class HID {
 
 	public Object hidInterface() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, InstantiationException, NoSuchMethodException, SecurityException {
         Class<?> parserClass = Class.forName(this.getHidInterfaceName());
-        Constructor<?> constructor = parserClass.getConstructor(Vocabulary.class, ObjectStack.class, String.class);
-        Object object = (Object)constructor.newInstance(this.getVocabulary(), this.getObjectStack(), this.getScriptFile());
+        Constructor<?> constructor = parserClass.getConstructor(Vocabulary.class, ObjectStack.class, String.class, String.class);
+        Object object = (Object)constructor.newInstance(this.getVocabulary(), this.getObjectStack(), this.getScriptFile(), this.getLanguageCode());
         return object;
     }
 	
@@ -103,6 +105,14 @@ public class HID {
 
 	public void setScriptFile(String scriptFile) {
 		this.scriptFile = scriptFile;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
 	}
 	
 }

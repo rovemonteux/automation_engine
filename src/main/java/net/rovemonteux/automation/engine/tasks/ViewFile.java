@@ -36,8 +36,8 @@ public class ViewFile extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("ViewFile");
 	
-	public ViewFile(ObjectStack objectStack_, Vocabulary vocabulary_) {
-		super(objectStack_, vocabulary_);
+	public ViewFile(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+		super(objectStack_, vocabulary_, language_);
 	}
 	
 	@Override

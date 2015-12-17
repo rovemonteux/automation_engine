@@ -35,13 +35,13 @@ public class RunScript extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("RunScript");
 	
-	public RunScript(ObjectStack objectStack_, Vocabulary vocabulary_) {
-		super(objectStack_, vocabulary_);
+	public RunScript(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+		super(objectStack_, vocabulary_, language_);
 	}
 	
 	@Override
 	public void run(BufferedWriter output, String[] args, String description) throws IOException {
-		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description);
+		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description, this.getLanguage());
 		script.setup();
 		if (args.length > 2) {
 			script.setScriptFile(args[args.length-1]);

@@ -29,6 +29,8 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -43,16 +45,20 @@ import net.rovemonteux.automation.engine.xml.XMLIO;
  */
 public class Vocabulary {
 
+	private static final Logger logger = LogManager.getLogger("Vocabulary");
+	
 	private String vocabularyFile = "";
 	private HashMap<String, ArrayList<String>> vocabulary = null;
+	private HashMap<String, ArrayList<String>> language = null;
 	private HashMap<String, ArrayList<String>> taskMode = null;
 	private HashMap<String, String> vocabularyProperties = null;
 	
 	public Vocabulary(String vocabularyFile_) throws DOMException, FileNotFoundException, ParserConfigurationException, SAXException, IOException {
 		this.setVocabularyFile(vocabularyFile_);
-		this.vocabulary = new HashMap<String, ArrayList<String>>();
-		this.taskMode = new HashMap<String, ArrayList<String>>();
-		this.vocabularyProperties = new HashMap<String, String>();
+		this.setVocabulary(new HashMap<String, ArrayList<String>>());
+		this.setLanguage(new HashMap<String, ArrayList<String>>());
+		this.setTaskMode(new HashMap<String, ArrayList<String>>());
+		this.setVocabularyProperties(new HashMap<String, String>());
 		if (this.getVocabularyFile() != null && this.getVocabularyFile().length() > 0 && !this.getVocabularyFile().toLowerCase().trim().equals("builtin")) {
 			populate(FileIO.getInputStream(this.getVocabularyFile()));
 		}
@@ -77,7 +83,7 @@ public class Vocabulary {
 			NodeList children = node.getChildNodes();
 			ArrayList<String> tasks = new ArrayList<String>();
 			ArrayList<String> modes = new ArrayList<String>();
-			String language = "";
+			String languageCode = null;
 			String value = "";
 			String threaded = "";
 			String description = "";
@@ -87,7 +93,7 @@ public class Vocabulary {
 				if (childNode.getNodeType() == Node.ELEMENT_NODE) {
 					switch(childNode.getNodeName()) {
 						case "language":
-							language = childNode.getTextContent();
+							languageCode = childNode.getTextContent();
 							break;
 						case "value":
 							value = childNode.getTextContent();
@@ -106,14 +112,23 @@ public class Vocabulary {
 							packageName = childNode.getTextContent();
 							break;
 					}
+					if (languageCode != null) {
+						if (this.getLanguage().containsKey(languageCode)) {
+							this.getLanguage().get(languageCode).add(value);
+						}
+						else {
+							ArrayList<String> values = new ArrayList<String>();
+							values.add(value);
+							this.getLanguage().put(languageCode, values);
+						}
+					}
 				}
-			}
-			if (!(vocabulary.containsKey(value))) {
+			}	
+			if (value != null && value.length() > 0 && !(vocabulary.containsKey(value))) {
 				vocabulary.put(value, tasks);
 				taskMode.put(value, modes);
-				vocabularyProperties.put(value, language+"|"+threaded+"|"+description+"|"+packageName);
+				vocabularyProperties.put(value, languageCode+"|"+threaded+"|"+description+"|"+packageName);
 			}
-			language = null;
 			value = null;
 			threaded = null;
 			description = null;
@@ -123,7 +138,7 @@ public class Vocabulary {
 		doc = null;
 	}
 
-	public List<ArrayList<String>> search(String arguments) {
+	public List<ArrayList<String>> search(String arguments, String language) {
 		arguments = arguments.replace("?", "").replace("!", "");
 		ArrayList<String> items = new ArrayList<String>();
 		ArrayList<String> result = new ArrayList<String>();
@@ -135,7 +150,7 @@ public class Vocabulary {
 		String argument = "";
 		while (counter < items.size()) {
 			argument += " "+items.get(counter).trim();
-			if (this.getVocabulary().containsKey(argument)) {
+			if (this.getLanguage().get(language).contains(argument)) {
 				result.add(argument);
 				for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
 					result.add(this.getVocabulary().get(argument).get(i));
@@ -152,7 +167,7 @@ public class Vocabulary {
 			argument = "";
 			while (counter < items.size()) {
 				argument = items.get(counter-1) + " " + items.get(counter);
-				if (this.getVocabulary().containsKey(argument)) {
+				if (this.getLanguage().get(language).contains(argument)) {
 					result.add(argument);
 					for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
 						result.add(this.getVocabulary().get(argument).get(i));
@@ -169,7 +184,7 @@ public class Vocabulary {
 			counter = 2;
 			argument = items.get(counter-2) + " " + items.get(counter-1) + " " + items.get(counter);
 			while (counter < items.size()) {
-				if (this.getVocabulary().containsKey(argument)) {
+				if (this.getLanguage().get(language).contains(argument)) {
 					result.add(argument);
 					for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
 						result.add(this.getVocabulary().get(argument).get(i));
@@ -190,15 +205,17 @@ public class Vocabulary {
 	 * 
 	 * @return	String representation of all available tasks
 	 */
-	public String listAvailableTasks() {
+	public String listAvailableTasks(String languageCode) {
 		StringBuilder result = new StringBuilder();
 		Set keySet = this.getVocabularyProperties().keySet();
 		for (Object key: keySet.toArray()) {
 			String value = this.getVocabularyProperties().get(key);
-			result.append(key);
-			result.append(" - ");
-			result.append(value.split("\\|")[2]);
-			result.append(String.format("%n"));
+			if (value.split("\\|")[0].equals(languageCode)) {
+				result.append(key);
+				result.append(" - ");
+				result.append(value.split("\\|")[2]);
+				result.append(String.format("%n"));
+			}
 		}
 		return result.toString();
 	}
@@ -233,6 +250,14 @@ public class Vocabulary {
 
 	public void setTaskMode(HashMap<String, ArrayList<String>> taskMode) {
 		this.taskMode = taskMode;
+	}
+
+	public HashMap<String, ArrayList<String>> getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(HashMap<String, ArrayList<String>> language) {
+		this.language = language;
 	}
 	
 }
