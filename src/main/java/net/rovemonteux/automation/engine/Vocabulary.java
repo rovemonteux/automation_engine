@@ -143,58 +143,59 @@ public class Vocabulary {
 		ArrayList<String> items = new ArrayList<String>();
 		ArrayList<String> result = new ArrayList<String>();
 		ArrayList<String> mode = new ArrayList<String>();
-		for (String item: arguments.split(" ")) {
+		for (String item : arguments.split(" ")) {
 			items.add(item);
 		}
 		int counter = 0;
-		String argument = items.get(0);
-		while (counter < items.size()) {
-			if (this.getLanguage().get(language).contains(argument)) {
-				result.add(argument);
-				for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
-					result.add(this.getVocabulary().get(argument).get(i));
-					mode.add(this.getTaskMode().get(argument).get(i));
-				}
-				break;
-			}
-			else {
-				argument += " "+items.get(counter).trim();
-				counter++;
-			} 
-		}
-		if (result.size() < 2 && items.size() > 1) {
-			counter = 1;
-			argument = "";
-			while (counter < items.size()) {
-				argument = items.get(counter-1) + " " + items.get(counter);
-				if (this.getLanguage().get(language).contains(argument)) {
-					result.add(argument);
-					for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
-						result.add(this.getVocabulary().get(argument).get(i));
-						mode.add(this.getTaskMode().get(argument).get(i));
-					}
-					break;
-				}
-				else {
-					counter++;
-				} 
-			}
-		}
-		if (result.size() < 2 && items.size() > 2) {
-			counter = 2;
-			argument = items.get(counter-2) + " " + items.get(counter-1) + " " + items.get(counter);
+		if (items.size() > 0) {
+			String argument = items.get(0);
 			while (counter < items.size()) {
 				if (this.getLanguage().get(language).contains(argument)) {
 					result.add(argument);
-					for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
+					if (this.getVocabulary().get(argument) != null) {
+					for (int i = 0; i < this.getVocabulary().get(argument).size(); i++) {
 						result.add(this.getVocabulary().get(argument).get(i));
 						mode.add(this.getTaskMode().get(argument).get(i));
+						}
 					}
 					break;
-				}
-				else {
+				} else {
+					argument += " " + items.get(counter).trim();
 					counter++;
-				} 
+				}
+			}
+			if (result.size() < 2 && items.size() > 1) {
+				counter = 1;
+				argument = "";
+				while (counter < items.size()) {
+					argument = items.get(counter - 1) + " " + items.get(counter);
+					if (this.getLanguage().get(language).contains(argument)) {
+						result.add(argument);
+						for (int i = 0; i < this.getVocabulary().get(argument).size(); i++) {
+							result.add(this.getVocabulary().get(argument).get(i));
+							mode.add(this.getTaskMode().get(argument).get(i));
+						}
+						break;
+					} else {
+						counter++;
+					}
+				}
+			}
+			if (result.size() < 2 && items.size() > 2) {
+				counter = 2;
+				argument = items.get(counter - 2) + " " + items.get(counter - 1) + " " + items.get(counter);
+				while (counter < items.size()) {
+					if (this.getLanguage().get(language).contains(argument)) {
+						result.add(argument);
+						for (int i = 0; i < this.getVocabulary().get(argument).size(); i++) {
+							result.add(this.getVocabulary().get(argument).get(i));
+							mode.add(this.getTaskMode().get(argument).get(i));
+						}
+						break;
+					} else {
+						counter++;
+					}
+				}
 			}
 		}
 		return Arrays.asList(result, mode);
