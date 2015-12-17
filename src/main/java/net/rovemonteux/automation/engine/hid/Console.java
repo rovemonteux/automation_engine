@@ -89,7 +89,6 @@ public class Console implements HIDFactory {
         reader.setPrompt(System.getProperty("user.name")+"@mae> ");
         Collection<String> commands = new LinkedList<String>();
         commands.add("clear");
-        commands.add("exit");
         commands.add("help");
         Set<String> keySet = this.getVocabulary().getVocabularyProperties().keySet();
 		for (Object key: keySet.toArray()) {
@@ -120,14 +119,12 @@ public class Console implements HIDFactory {
 	public void list() {
 		this.getConsole().writer().write("Available commands: "+String.format("%n"));
 		this.getConsole().writer().write("clear - Clears the screen"+String.format("%n"));
-		this.getConsole().writer().write("exit - Exits the automation engine"+String.format("%n"));
 		this.getConsole().writer().write(this.getVocabulary().listAvailableTasks(this.getLanguageCode()));
 		this.getConsole().flush();
 	}
 	
 	@Override
 	public void processTask(String task, String language) {
-		if (!(task.equals("exit"))) {
 			if (task.equals("help")) {
 				list();
 			} else {
@@ -147,7 +144,6 @@ public class Console implements HIDFactory {
 		associatedClass = null;
 		associatedMode = null;
 		results = null;
-		}
 		}
 	}
 	

@@ -147,9 +147,8 @@ public class Vocabulary {
 			items.add(item);
 		}
 		int counter = 0;
-		String argument = "";
+		String argument = items.get(0);
 		while (counter < items.size()) {
-			argument += " "+items.get(counter).trim();
 			if (this.getLanguage().get(language).contains(argument)) {
 				result.add(argument);
 				for (int i=0; i<this.getVocabulary().get(argument).size(); i++) {
@@ -159,6 +158,7 @@ public class Vocabulary {
 				break;
 			}
 			else {
+				argument += " "+items.get(counter).trim();
 				counter++;
 			} 
 		}

@@ -111,4 +111,20 @@
 <description>Gets the size of a given file</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>exit</value>
+<task mode="run">Exit</task>
+<threaded>false</threaded>
+<description>Exits</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>pt</language>
+<value>sair</value>
+<task mode="run">Exit</task>
+<threaded>false</threaded>
+<description>Termina a execucao da maquina virtual</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
