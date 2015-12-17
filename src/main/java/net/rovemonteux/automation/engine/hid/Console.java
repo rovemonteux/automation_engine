@@ -93,7 +93,10 @@ public class Console implements HIDFactory {
         commands.add("help");
         Set<String> keySet = this.getVocabulary().getVocabularyProperties().keySet();
 		for (Object key: keySet.toArray()) {
-			commands.add(key.toString());
+			String value = this.getVocabulary().getVocabularyProperties().get(key.toString());
+			if (value.split("\\|")[0].equals(this.getLanguageCode())) {
+				commands.add(key.toString());
+			}
 		}
         List<Completer> completors = new LinkedList<Completer>();
         StringsCompleter stringsCompleter = new StringsCompleter(commands);

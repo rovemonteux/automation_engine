@@ -56,6 +56,14 @@
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
 <term>
+<language>pt</language>
+<value>mostre arquivos</value>
+<task mode="print">ListFiles</task>
+<threaded>true</threaded>
+<description>Mostra os arquivos do diretorio especificado</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
 <language>en</language>
 <value>stack files list</value>
 <task mode="stack">ListFiles</task>
