@@ -1,0 +1,4 @@
+stack free memory
+create file test.txt
+view file test.txt
+list files

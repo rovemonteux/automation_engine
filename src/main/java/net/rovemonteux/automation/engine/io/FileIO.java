@@ -97,8 +97,11 @@ public class FileIO {
      * @throws IOException	Error while writing data to the file
      */
     public static void write(String filename, String content, boolean append) throws IOException {
-        File file = new File(filename);
-        file.getParentFile().mkdirs();
+    	File file = new File(filename);
+        try {
+        	file.getParentFile().mkdirs();
+        }
+        catch (Exception e) { }
         FileWriter fileWriter = new FileWriter(file, append);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(content);

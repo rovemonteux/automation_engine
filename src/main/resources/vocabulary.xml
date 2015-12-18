@@ -127,4 +127,12 @@
 <description>Termina a execucao da maquina virtual</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>create file</value>
+<task mode="run">CreateFile</task>
+<threaded>false</threaded>
+<description>Creates a given file using the first object in the Stack as content</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
