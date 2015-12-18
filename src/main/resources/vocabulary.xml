@@ -82,9 +82,17 @@
 <term>
 <language>en</language>
 <value>view file</value>
-<task mode="run">ViewFile</task>
+<task mode="print">ViewFile</task>
 <threaded>false</threaded>
 <description>Views a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>load file</value>
+<task mode="stack">ViewFile</task>
+<threaded>false</threaded>
+<description>Loads a file into the Stack</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
 <term>
