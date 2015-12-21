@@ -55,13 +55,22 @@ public class DeleteFile extends TaskFactory {
 	}
 	
 	public void deleteFile(String[] args) {
-		if (args.length > 2) {
-			FileIO.delete(args[args.length-1]);
-			logger.debug("Deleted file "+args[args.length-1]+".");
+		if (args.length > 1) {
+			if (FileIO.exists(args[args.length-1])) {
+				FileIO.delete(args[args.length-1]);
+				logger.debug("Deleted file "+args[args.length-1]+".");
+			}
+			else {
+				specifyFile();
+			}
 		}
 		else {
-			logger.error("Please specify a file to be deleted.");
+			specifyFile();
 		}
+	}
+	
+	public void specifyFile() {
+		logger.error("Please specify a file to be deleted.");
 	}
 	
 }

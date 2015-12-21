@@ -44,6 +44,7 @@ public interface HIDFactory {
 	 * Runs the given task.
 	 * 
 	 * @param task	Task to be run
+	 * @param language	Language to be used
 	 */
 	public void processTask(String task, String language);
 	

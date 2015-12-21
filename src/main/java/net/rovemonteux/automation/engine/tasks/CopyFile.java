@@ -62,19 +62,29 @@ public class CopyFile extends TaskFactory {
 	}
 	
 	public boolean copyFile(String[] args) {
-		if (args.length > 3) {
-			boolean result = FileIO.copy(args[args.length-2], args[args.length-1]);
-			if (result) {
-				logger.debug("Copied "+args[args.length-2]+" to "+args[args.length-1]);
+		if (args.length > 2) {
+			if (FileIO.exists(args[args.length-2])) {
+				boolean result = FileIO.copy(args[args.length-2], args[args.length-1]);
+				if (result) {
+					logger.debug("Copied "+args[args.length-2]+" to "+args[args.length-1]);
+				}
+				else {
+					logger.error("Failed copying "+args[args.length-2]+" to "+args[args.length-1]);
+				}
+				return result;
 			}
 			else {
-				logger.error("Failed copying "+args[args.length-2]+" to "+args[args.length-1]);
+				specifyFile();
+				return false;
 			}
-			return result;
 		}
 		else {
-			logger.error("Please specify a file to be copied, and a destination file.");
+			specifyFile();
 			return false;
 		}
+	}
+	
+	public void specifyFile() {
+		logger.error("Please specify a file to be copied, and a destination file.");
 	}
 }

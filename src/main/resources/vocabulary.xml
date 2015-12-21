@@ -49,6 +49,14 @@
 </term>
 <term>
 <language>en</language>
+<value>ls</value>
+<task mode="print">ListFiles</task>
+<threaded>true</threaded>
+<description>Lists the files in a given folder</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
 <value>list files</value>
 <task mode="print">ListFiles</task>
 <threaded>true</threaded>
@@ -97,10 +105,26 @@
 </term>
 <term>
 <language>en</language>
+<value>rm</value>
+<task mode="run">DeleteFile</task>
+<threaded>false</threaded>
+<description>Deletes a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
 <value>delete file</value>
 <task mode="run">DeleteFile</task>
 <threaded>false</threaded>
 <description>Deletes a given file</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>cp</value>
+<task mode="print">CopyFile</task>
+<threaded>false</threaded>
+<description>Copies a given file to another given file</description>
 <package>net.rovemonteux.automation.engine.tasks</package>
 </term>
 <term>
