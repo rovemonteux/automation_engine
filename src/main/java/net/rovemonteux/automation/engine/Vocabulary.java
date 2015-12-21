@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -209,8 +210,11 @@ public class Vocabulary {
 	 */
 	public String listAvailableTasks(String languageCode) {
 		StringBuilder result = new StringBuilder();
-		Set keySet = this.getVocabularyProperties().keySet();
-		for (Object key: keySet.toArray()) {
+		Set<String> keySet = this.getVocabularyProperties().keySet();
+		ArrayList<String> keyList = new ArrayList<String>();
+		keyList.addAll(keySet);
+		Collections.sort(keyList);
+		for (String key: keyList) {
 			String value = this.getVocabularyProperties().get(key);
 			if (value.split("\\|")[0].equals(languageCode)) {
 				result.append(key);
@@ -219,6 +223,8 @@ public class Vocabulary {
 				result.append(String.format("%n"));
 			}
 		}
+		keySet = null;
+		keyList = null;
 		return result.toString();
 	}
 	
