@@ -116,18 +116,8 @@ public class Console implements HIDFactory {
 		}
 	}
 	
-	public void list() {
-		this.getConsole().writer().write("Available commands: "+String.format("%n"));
-		this.getConsole().writer().write("clear - Clears the screen"+String.format("%n"));
-		this.getConsole().writer().write(this.getVocabulary().listAvailableTasks(this.getLanguageCode()));
-		this.getConsole().flush();
-	}
-	
 	@Override
 	public void processTask(String task, String language) {
-			if (task.equals("help")) {
-				list();
-			} else {
 		List<ArrayList<String>> results = this.getVocabulary().search(task, language);
 		ArrayList<String> associatedClass = results.get(0);
 		ArrayList<String> associatedMode = results.get(1);
@@ -139,12 +129,10 @@ public class Console implements HIDFactory {
 		}
 		else {
 			this.getConsole().writer().write("Syntax error: unknown command '"+task+"'\n");
-			list();
 		}
 		associatedClass = null;
 		associatedMode = null;
 		results = null;
-		}
 	}
 	
 	public java.io.Console getConsole() {

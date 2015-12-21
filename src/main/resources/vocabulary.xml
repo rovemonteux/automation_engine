@@ -2,6 +2,22 @@
 <vocabulary>
 <term>
 <language>en</language>
+<value>help</value>
+<task mode="print">Help</task>
+<threaded>false</threaded>
+<description>List all available commands to the current Automation Engine</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>pt</language>
+<value>ajuda</value>
+<task mode="print">Help</task>
+<threaded>false</threaded>
+<description>List all available commands to the current Automation Engine</description>
+<package>net.rovemonteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
 <value>stack free memory</value>
 <task mode="stack">FreeMemory</task>
 <threaded>false</threaded>
