@@ -27,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.exception.StackTrace;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 public class TaskRunner extends Thread {
@@ -41,8 +42,9 @@ public class TaskRunner extends Thread {
 	private ObjectStack objectStack = null;
 	private Vocabulary vocabulary = null;
 	private String language = null;
+	private Messages messages = null;
 	
-	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_, Vocabulary vocabulary_, String language_) {
+	public TaskRunner(BufferedWriter output_, String taskClassName_, String taskProperties_, String[] arguments_, ObjectStack objectStack_, String mode_, Vocabulary vocabulary_, String language_, Messages messages_) {
 		this.setTaskClassName(taskClassName_);
 		for (String taskProperty: taskProperties_.split("\\|")) {
 			this.getTaskProperties().add(taskProperty);
@@ -53,6 +55,7 @@ public class TaskRunner extends Thread {
 		this.setMode(mode_);
 		this.setVocabulary(vocabulary_);
 		this.setLanguage(language_);
+		this.setMessages(messages_);
 	}
 	
 	public void process() {
@@ -67,8 +70,8 @@ public class TaskRunner extends Thread {
 	public void runTask() {
 		try {
 			Class<?> taskClass = Class.forName(this.getTaskProperties().get(3)+"."+taskClassName);
-			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class, String.class);
-			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary(), this.getLanguage());
+			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class, String.class, Messages.class);
+			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary(), this.getLanguage(), this.getMessages());
 			if (this.getMode().equals("") || this.getMode().toLowerCase().equals("run")) {
 				task.run(output, this.arguments, this.getTaskProperties().get(2));
 			}
@@ -151,6 +154,14 @@ public class TaskRunner extends Thread {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public Messages getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Messages messages) {
+		this.messages = messages;
 	}
 	
 }

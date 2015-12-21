@@ -33,6 +33,7 @@ import org.apache.logging.log4j.Logger;
 import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.exception.StackTrace;
 import net.rovemonteux.automation.engine.io.FileIO;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 import net.rovemonteux.automation.engine.tasks.TaskRunner;
 
@@ -52,12 +53,14 @@ public class Console implements HIDFactory {
 	private ObjectStack objectStack = null;
 	private String scriptFile = "";
 	private String languageCode = "";
+	private Messages messages = null;
 	
-	public Console(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_) {
+	public Console(Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_, Messages messages_) {
 		this.setVocabulary(vocabulary_);
 		this.setObjectStack(objectStack_);
 		this.setScriptFile(scriptFile_);
 		this.setLanguageCode(languageCode_);
+		this.setMessages(messages_);
 		logger.info("Console HID started");
 	}
 	
@@ -103,7 +106,7 @@ public class Console implements HIDFactory {
         for (Completer c : completors) {
             reader.addCompleter(c);
         }
-        this.getConsole().writer().write("Console auto completion is enabled, type the first letter of the command, and then the <tab> key. A <tab> on its own lists all available commands. Command history is available by pressing the up and down keys."+String.format("%n"));
+        this.getConsole().writer().write(this.getMessages().get("console_welcome", new Object[]{}));
         this.getConsole().flush();
         while (!(result.equals("exit"))) {
 			result = reader.readLine(System.getProperty("user.name")+"@mae> ").toLowerCase().trim();
@@ -123,12 +126,12 @@ public class Console implements HIDFactory {
 		ArrayList<String> associatedMode = results.get(1);
 		if (associatedClass.size() > 0) {
 			for (int i=0; i<associatedMode.size(); i++) {
-				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary(), this.getLanguageCode());
+				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), task.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary(), this.getLanguageCode(), this.getMessages());
 				runner.process();
 			}
 		}
 		else {
-			this.getConsole().writer().write("Syntax error: unknown command '"+task+"'\n");
+			logger.error(this.getMessages().get("syntax_error", new Object[]{task}));
 		}
 		associatedClass = null;
 		associatedMode = null;
@@ -179,6 +182,14 @@ public class Console implements HIDFactory {
 
 	public void setLanguageCode(String languageCode) {
 		this.languageCode = languageCode;
+	}
+
+	public Messages getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Messages messages) {
+		this.messages = messages;
 	}
 	
 }

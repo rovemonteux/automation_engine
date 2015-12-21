@@ -26,14 +26,15 @@ import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.library.os.Environment;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 public class FreeMemory extends TaskFactory {
 	
 	private static final Logger logger = LogManager.getLogger("FreeMemory");
 	
-	public FreeMemory(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
-		super(objectStack_, vocabulary_, language_);
+	public FreeMemory(ObjectStack objectStack_, Vocabulary vocabulary_, String language_, Messages messages_) {
+		super(objectStack_, vocabulary_, language_, messages_);
 	}
 
 	@Override

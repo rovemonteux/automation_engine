@@ -26,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.io.FileIO;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 /**
@@ -35,8 +36,8 @@ public class CreateFile extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("CreateFile");
 	
-	public CreateFile(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
-		super(objectStack_, vocabulary_, language_);
+	public CreateFile(ObjectStack objectStack_, Vocabulary vocabulary_, String language_, Messages messages_) {
+		super(objectStack_, vocabulary_, language_, messages_);
 	}
 	
 	@Override

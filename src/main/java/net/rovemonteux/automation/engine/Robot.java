@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import net.rovemonteux.automation.engine.exception.StackTrace;
 import net.rovemonteux.automation.engine.hid.HID;
 import net.rovemonteux.automation.engine.hid.HIDFactory;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 import org.kohsuke.args4j.Argument;
@@ -78,7 +79,8 @@ public class Robot {
 	public void startup(String hidInterface, String vocabularyFile, String scriptFile, String languageCode) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, DOMException, ParserConfigurationException, SAXException, IOException {
 		Vocabulary vocabulary = new Vocabulary(vocabularyFile);
 		ObjectStack objectStack = new ObjectStack();
-		HID hid = new HID(hidInterface, vocabulary, objectStack, scriptFile, languageCode);
+		Messages messages = new Messages(languageCode);
+		HID hid = new HID(hidInterface, vocabulary, objectStack, scriptFile, languageCode, messages);
 		HIDFactory hidFactory = HIDFactory.class.cast(hid.getHidClass());
 		hidFactory.setup();
 		hidFactory.run();

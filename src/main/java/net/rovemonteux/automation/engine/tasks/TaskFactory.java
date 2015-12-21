@@ -22,6 +22,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import net.rovemonteux.automation.engine.Vocabulary;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 public abstract class TaskFactory {
@@ -29,11 +30,13 @@ public abstract class TaskFactory {
 	private ObjectStack objectStack = null;
 	private Vocabulary vocabulary = null;
 	private String language = null;
+	private Messages messages = null;
 	
-	public TaskFactory(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
+	public TaskFactory(ObjectStack objectStack_, Vocabulary vocabulary_, String language_, Messages messages_) {
 		this.setObjectStack(objectStack_);
 		this.setVocabulary(vocabulary_);
 		this.setLanguage(language_);
+		this.setMessages(messages_);
 	}
 	
 	/**
@@ -114,6 +117,14 @@ public abstract class TaskFactory {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public Messages getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Messages messages) {
+		this.messages = messages;
 	}
 	
 }

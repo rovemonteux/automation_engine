@@ -1,0 +1,4 @@
+error = Error
+fatal_error = Fatal error
+syntax_error = Syntax error: unknown command '%s'
+console_welcome = Console auto completion is enabled, type the first letter of the command, and then the <tab> key. A <tab> on its own lists all available commands. Command history is available by pressing the up and down keys.\n

@@ -26,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
 import net.rovemonteux.automation.engine.hid.Script;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 /**
@@ -35,13 +36,13 @@ public class RunScript extends TaskFactory {
 
 	private static final Logger logger = LogManager.getLogger("RunScript");
 	
-	public RunScript(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
-		super(objectStack_, vocabulary_, language_);
+	public RunScript(ObjectStack objectStack_, Vocabulary vocabulary_, String language_, Messages messages_) {
+		super(objectStack_, vocabulary_, language_, messages_);
 	}
 	
 	@Override
 	public void run(BufferedWriter output, String[] args, String description) throws IOException {
-		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description, this.getLanguage());
+		Script script = new Script(this.getVocabulary(), this.getObjectStack(), description, this.getLanguage(), this.getMessages());
 		script.setup();
 		if (args.length > 2) {
 			script.setScriptFile(args[args.length-1]);

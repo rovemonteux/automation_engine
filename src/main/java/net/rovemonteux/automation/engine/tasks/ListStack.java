@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
+import net.rovemonteux.automation.engine.localization.Messages;
 import net.rovemonteux.automation.engine.storage.ObjectStack;
 
 public class ListStack extends TaskFactory {
@@ -14,8 +15,8 @@ public class ListStack extends TaskFactory {
 	private static final Logger logger = LogManager.getLogger("ListStack");
 	private ObjectStack objectStack = null;
 	
-	public ListStack(ObjectStack objectStack_, Vocabulary vocabulary_, String language_) {
-		super(objectStack_, vocabulary_, language_);
+	public ListStack(ObjectStack objectStack_, Vocabulary vocabulary_, String language_, Messages messages_) {
+		super(objectStack_, vocabulary_, language_, messages_);
 	}
 	
 	@Override
