@@ -8,3 +8,4 @@ console_started = Console HID started
 executing_script = Executing script '%s'
 executed_script = Executed script '%s'
 script_error = Error while executing script '%s'
+script_hid_started = Script HID started

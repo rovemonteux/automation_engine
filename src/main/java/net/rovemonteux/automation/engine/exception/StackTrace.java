@@ -40,7 +40,7 @@ public class StackTrace {
          }
          Throwable cause = exception.getCause();
          if (cause != null) {
-        	 fullException.append("Caused by " );
+        	 fullException.append(String.format("%n"));
         	 fullException.append(cause.getLocalizedMessage());
         	 fullException.append(String.format("%n"));
         	 ste = cause.getStackTrace();

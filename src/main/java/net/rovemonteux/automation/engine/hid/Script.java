@@ -29,6 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.rovemonteux.automation.engine.Vocabulary;
+import net.rovemonteux.automation.engine.exception.StackTrace;
 import net.rovemonteux.automation.engine.io.FileIO;
 import net.rovemonteux.automation.engine.io.LoggingOutputStream;
 import net.rovemonteux.automation.engine.localization.Messages;
@@ -54,7 +55,7 @@ public class Script implements HIDFactory {
 		this.setScriptFile(scriptFile_);
 		this.setLanguageCode(languageCode_);
 		this.setMessages(messages_);
-		logger.info("Script HID started");
+		logger.info(this.getMessages().get("script_hid_started", new Object[]{}));
 	}
 	
 	@Override
@@ -67,15 +68,15 @@ public class Script implements HIDFactory {
 		if (this.getScriptFile() != null && this.getScriptFile().length() > 0) {
 			try {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");
-				logger.info("Executing script "+new File(this.getScriptFile()).getAbsolutePath());
+				logger.info(this.getMessages().get("executing_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
 				for (String scriptEntry: script) {
 					processTask(scriptEntry, this.getLanguageCode());
 				}
-				logger.info("Executed script "+new File(this.getScriptFile()).getAbsolutePath());
+				logger.info(this.getMessages().get("executed_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
 			}
 			catch (Exception e) {
-				logger.error("Error reading script file "+this.getScriptFile());
-				logger.error(e);
+				logger.error(this.getMessages().get("script_error", new Object[]{this.getScriptFile()}));
+				logger.error(StackTrace.asString(e));
 			}
 		}
 	}
