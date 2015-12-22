@@ -13,3 +13,5 @@ file_not_found = File '%s' doesn't exists
 copy_file_successful = File '%s' has been successfully copied to '%s'
 copy_file_error = Failed copying file '%s' to '%s'
 copy_file_no_file_specified = Please specify a file to be copied and its destination
+create_file_completed = Created file '%s'
+create_file_no_file_specified = Please specify the name of the file to be created

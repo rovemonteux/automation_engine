@@ -58,14 +58,14 @@ public class CreateFile extends TaskFactory {
 	public void createFile(String[] args) {
 		if (args.length > 2) {
 			try {
-				FileIO.write(args[2], this.getObjectStack().getFirst().toString());
-				logger.debug("Created file "+args[2]);
+				FileIO.write(args[2], this.getObjectStack().getLast().toString());
+				logger.debug(this.getMessages().get("create_file_completed", new Object[]{args[2]}));
 			} catch (IOException e) {
 				logger.error(e);
 			}
 		}
 		else {
-			logger.error("Please specify the name of the file to be created.");
+			logger.error(this.getMessages().get("create_file_no_file_specified", new Object[]{}));
 		}
 	}
 
