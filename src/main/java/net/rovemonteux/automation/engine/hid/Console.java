@@ -61,14 +61,14 @@ public class Console implements HIDFactory {
 		this.setScriptFile(scriptFile_);
 		this.setLanguageCode(languageCode_);
 		this.setMessages(messages_);
-		logger.info("Console HID started");
+		logger.info(this.getMessages().get("console_started", new Object[]{}));
 	}
 	
 	@Override
 	public void setup() {
-		logger.info("Setting up the Console");
+		logger.info(this.getMessages().get("setting_up_console", new Object[]{}));
 		this.setConsole(System.console());
-		logger.info("Set the Console as the system's console, starting up");
+		logger.info(this.getMessages().get("console_setup", new Object[]{}));
 	}
 
 	@Override
@@ -76,14 +76,14 @@ public class Console implements HIDFactory {
 		if (this.getScriptFile() != null && this.getScriptFile().length() > 0) {
 			try {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");
-				logger.info("Executing script "+new File(this.getScriptFile()).getAbsolutePath());
+				logger.info(this.getMessages().get("executing_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
 				for (String scriptEntry: script) {
 					processTask(scriptEntry, this.getLanguageCode());
 				}
-				logger.info("Executed script "+new File(this.getScriptFile()).getAbsolutePath());
+				logger.info(this.getMessages().get("executed_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
 			}
 			catch (Exception e) {
-				logger.error("Error interpreting script file "+this.getScriptFile());
+				logger.error(this.getMessages().get("script_error", new Object[]{this.getScriptFile()}));
 				logger.error(StackTrace.asString(e));
 			}
 		}
@@ -109,7 +109,7 @@ public class Console implements HIDFactory {
         this.getConsole().writer().write(this.getMessages().get("console_welcome", new Object[]{}));
         this.getConsole().flush();
         while (!(result.equals("exit"))) {
-			result = reader.readLine(System.getProperty("user.name")+"@mae> ").toLowerCase().trim();
+			result = reader.readLine(reader.getPrompt()).toLowerCase().trim();
 			 if (result.equals("clear")) {
                  reader.clearScreen();
              }
