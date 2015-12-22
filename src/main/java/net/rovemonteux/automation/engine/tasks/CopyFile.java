@@ -48,10 +48,10 @@ public class CopyFile extends TaskFactory {
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
 		if (copyFile(args)) {
-			output.write("File "+args[args.length-2]+" has been successfully copied to "+args[args.length-1]+".");
+			output.write(this.getMessages().get("copy_file_successful", new Object[]{args[args.length-2], args[args.length-1]}));
 		}
 		else {
-			output.write("Failed copying file "+args[args.length-2]+" to "+args[args.length-1]+".");
+			output.write(this.getMessages().get("copy_file_error", new Object[]{args[args.length-2], args[args.length-1]}));
 		}
 		output.write(String.format("%n"));
 		output.flush();
@@ -65,14 +65,7 @@ public class CopyFile extends TaskFactory {
 	public boolean copyFile(String[] args) {
 		if (args.length > 2) {
 			if (FileIO.exists(args[args.length-2])) {
-				boolean result = FileIO.copy(args[args.length-2], args[args.length-1]);
-				if (result) {
-					logger.debug("Copied "+args[args.length-2]+" to "+args[args.length-1]);
-				}
-				else {
-					logger.error("Failed copying "+args[args.length-2]+" to "+args[args.length-1]);
-				}
-				return result;
+				return FileIO.copy(args[args.length-2], args[args.length-1]);
 			}
 			else {
 				specifyFile();
@@ -86,6 +79,6 @@ public class CopyFile extends TaskFactory {
 	}
 	
 	public void specifyFile() {
-		logger.error("Please specify a file to be copied, and a destination file.");
+		logger.error(this.getMessages().get("copy_file_no_file_specified", new Object[]{}));
 	}
 }
