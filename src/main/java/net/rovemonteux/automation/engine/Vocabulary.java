@@ -92,26 +92,25 @@ public class Vocabulary {
 			for (int a=0; a<children.getLength(); a++) {
 				Node childNode = children.item(a);
 				if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-					switch(childNode.getNodeName()) {
-						case "language":
-							languageCode = childNode.getTextContent();
-							break;
-						case "value":
-							value = childNode.getTextContent();
-							break;
-						case "threaded":
-							threaded = childNode.getTextContent();
-							break;
-						case "description":
-							description = childNode.getTextContent();
-							break;
-						case "task":
-							tasks.add(childNode.getTextContent());
-							modes.add(childNode.getAttributes().getNamedItem("mode").getTextContent());
-							break;
-						case "package":
-							packageName = childNode.getTextContent();
-							break;
+					if (childNode.getNodeName().equals("language")) {
+						languageCode = childNode.getTextContent();
+					}
+					else if (childNode.getNodeName().equals("value")) {
+						value = childNode.getTextContent();
+					}
+					else if (childNode.getNodeName().equals("threaded")) {
+						threaded = childNode.getTextContent();
+					}	
+					else if (childNode.getNodeName().equals("description")) {
+						description = childNode.getTextContent();
+					}
+					else if (childNode.getNodeName().equals("task")) {
+						tasks.add(childNode.getTextContent());
+						modes.add(childNode.getAttributes().getNamedItem("mode").getTextContent());
+					}
+					else if (childNode.getNodeName().equals("package")) {
+						packageName = childNode.getTextContent();
+					}	
 					}
 					if (languageCode != null) {
 						if (this.getLanguage().containsKey(languageCode)) {
@@ -124,7 +123,6 @@ public class Vocabulary {
 						}
 					}
 				}
-			}	
 			if (value != null && value.length() > 0 && !(vocabulary.containsKey(value))) {
 				vocabulary.put(value, tasks);
 				taskMode.put(value, modes);
