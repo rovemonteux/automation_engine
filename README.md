@@ -172,7 +172,7 @@ An example **extension** is the Empty Stack one, which clears the **object stack
 Author
 ======
 
-* [Rove Monteux] - <https://rmonteux.wordpress.com/>, <https://www.linkedin.com/in/rovemonteux>
+* [Rove Monteux] - <https://monteux.cf/>, <https://www.linkedin.com/in/rovemonteux>
 
 License
 =======
