@@ -3,7 +3,7 @@
 
 [![Build Status](https://api.travis-ci.org/rovemonteux/automation_engine.svg?branch=master)](https://travis-ci.org/rovemonteux/automation_engine/)
 
-**Monteux Automation Engine** is a GPLed framework for Java SE 6 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a localized built-in shell and script interpreter.
+**Monteux Automation Engine** is a GPLed framework for Java SE 7 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a localized built-in shell and script interpreter.
 
 The automation is based on **tasks lists** and **object stacks**, interacting with the environment via **HIDs**. 
 
