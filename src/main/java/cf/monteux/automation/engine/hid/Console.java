@@ -73,6 +73,8 @@ public class Console implements HIDFactory {
 
 	@Override
 	public void run() throws IOException {
+            this.setup();
+            logger.info("Console: "+this.getConsole());
 		if (this.getScriptFile() != null && this.getScriptFile().length() > 0) {
 			try {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");

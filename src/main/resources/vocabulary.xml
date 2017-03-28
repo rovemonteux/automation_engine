@@ -6,7 +6,7 @@
 <task mode="print">Help</task>
 <threaded>false</threaded>
 <description>List all available commands to the current Automation Engine</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>pt</language>
@@ -14,7 +14,7 @@
 <task mode="print">Help</task>
 <threaded>false</threaded>
 <description>List all available commands to the current Automation Engine</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -22,7 +22,7 @@
 <task mode="stack">FreeMemory</task>
 <threaded>false</threaded>
 <description>Puts the current free memory from the local machine in the stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -30,7 +30,7 @@
 <task mode="print">FreeMemory</task>
 <threaded>false</threaded>
 <description>Prints the free memory in the local machine from the stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -38,7 +38,7 @@
 <task mode="run">EmptyStack</task>
 <threaded>false</threaded>
 <description>Empties the object stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -46,7 +46,7 @@
 <task mode="print">ListStack</task>
 <threaded>false</threaded>
 <description>Lists the contents of the object stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -61,7 +61,7 @@
 <task mode="print">ListStack</task>
 <threaded>false</threaded>
 <description>Chained empty-list-add-list-empty-list stack demo</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -69,7 +69,7 @@
 <task mode="print">ListFiles</task>
 <threaded>true</threaded>
 <description>Lists the files in a given folder</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -77,7 +77,7 @@
 <task mode="print">ListFiles</task>
 <threaded>true</threaded>
 <description>Lists the files in a given folder</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>pt</language>
@@ -85,7 +85,7 @@
 <task mode="print">ListFiles</task>
 <threaded>true</threaded>
 <description>Mostra os arquivos do diretorio especificado</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -93,7 +93,7 @@
 <task mode="stack">ListFiles</task>
 <threaded>false</threaded>
 <description>Puts a list of the files in a given folder in the stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -101,7 +101,7 @@
 <task mode="run">RunScript</task>
 <threaded>false</threaded>
 <description>Runs a given script file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -109,7 +109,7 @@
 <task mode="print">ViewFile</task>
 <threaded>false</threaded>
 <description>Views a given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -117,7 +117,7 @@
 <task mode="stack">ViewFile</task>
 <threaded>false</threaded>
 <description>Loads a file into the Stack</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -125,7 +125,7 @@
 <task mode="run">DeleteFile</task>
 <threaded>false</threaded>
 <description>Deletes a given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -133,7 +133,7 @@
 <task mode="run">DeleteFile</task>
 <threaded>false</threaded>
 <description>Deletes a given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -141,7 +141,7 @@
 <task mode="print">CopyFile</task>
 <threaded>false</threaded>
 <description>Copies a given file to another given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -149,7 +149,7 @@
 <task mode="print">CopyFile</task>
 <threaded>false</threaded>
 <description>Copies a given file to another given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -157,7 +157,7 @@
 <task mode="run">FileSize</task>
 <threaded>false</threaded>
 <description>Gets the size of a given file</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -165,7 +165,7 @@
 <task mode="run">Exit</task>
 <threaded>false</threaded>
 <description>Exits</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>pt</language>
@@ -173,7 +173,7 @@
 <task mode="run">Exit</task>
 <threaded>false</threaded>
 <description>Termina a execucao da maquina virtual</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
 <language>en</language>
@@ -181,6 +181,6 @@
 <task mode="run">CreateFile</task>
 <threaded>false</threaded>
 <description>Creates a given file using the first object in the Stack as content</description>
-<package>net.rovemonteux.automation.engine.tasks</package>
+<package>cf.monteux.automation.engine.tasks</package>
 </term>
 </vocabulary>

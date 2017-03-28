@@ -29,7 +29,7 @@ public class Task {
 	private Object taskClass = null;
 	
 	public Task(String taskInterfaceName_) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
-		this.setTaskInterfaceName("net.rovemonteux.automation.engine.tasks."+taskInterfaceName_);
+		this.setTaskInterfaceName("cf.monteux.automation.engine.tasks."+taskInterfaceName_);
 		Class<?> driverClass = Class.forName(this.getTaskInterfaceName());
 		Class[] argumentTypes = new Class[] { };
 		this.setStartupMethod(driverClass.getDeclaredMethod("run", argumentTypes));

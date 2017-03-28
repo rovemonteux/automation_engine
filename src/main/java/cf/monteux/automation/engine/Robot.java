@@ -68,6 +68,7 @@ public class Robot {
 		}
 		catch (Exception e) {
 			logger.error(StackTrace.asString(e));
+                        e.printStackTrace();
 			logger.error(usage());
 		}
 	}
@@ -82,7 +83,6 @@ public class Robot {
 		Messages messages = new Messages(languageCode);
 		HID hid = new HID(hidInterface, vocabulary, objectStack, scriptFile, languageCode, messages);
 		HIDFactory hidFactory = HIDFactory.class.cast(hid.getHidClass());
-		hidFactory.setup();
 		hidFactory.run();
 	}
 	
