@@ -72,7 +72,7 @@ public class TaskRunner extends Thread {
 			Class<?> taskClass = Class.forName(this.getTaskProperties().get(3)+"."+taskClassName);
 			Constructor<?> constructor = taskClass.getConstructor(ObjectStack.class, Vocabulary.class, String.class, Messages.class);
 			TaskFactory task = (TaskFactory) constructor.newInstance(this.getObjectStack(), this.getVocabulary(), this.getLanguage(), this.getMessages());
-			if (this.getMode().equals("") || this.getMode().toLowerCase().equals("run")) {
+                        if (this.getMode().equals("") || this.getMode().toLowerCase().equals("run")) {
 				task.run(output, this.arguments, this.getTaskProperties().get(2));
 			}
 			else if (this.getMode().equals("stack")) {
@@ -82,8 +82,13 @@ public class TaskRunner extends Thread {
 				task.print(output, this.arguments, this.getTaskProperties().get(2));
 			}
 		}
+                catch (ClassNotFoundException cnfe) {
+                    logger.error("Syntax error: Extension not found in classpath: '"+this.getTaskProperties().get(3)+"."+taskClassName+"'.");
+                    cnfe.printStackTrace();
+                }
 		catch (Exception e) {
-			logger.error(StackTrace.asString(e));
+                        logger.error(StackTrace.asString(e));
+                        e.printStackTrace();
 		}
 	}
 	

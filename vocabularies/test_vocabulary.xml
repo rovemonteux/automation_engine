@@ -6,6 +6,6 @@
 <task mode="run">FreeMemory</task>
 <threaded>false</threaded>
 <description>Puts the current free memory from the local machine in the stack and prints it</description>
-<package>net.rovemonteux.automation.engine.tasks.extensions</package>
+<package>cf.monteux.automation.engine.tasks.extensions</package>
 </term>
 </vocabulary>
