@@ -43,7 +43,7 @@ Usage
 =====
 
 ```
-java -jar target/Monteux_Automation_Engine-0.0.1-SNAPSHOT-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt -language en
+java -jar target/Monteux_Automation_Engine-1.0.0-jar-with-dependencies.jar -hid Console -vocabulary vocabularies/test_vocabulary.xml -script scripts/test_script_custom_vocabulary.txt -language en
 ```
 
 **-hid**

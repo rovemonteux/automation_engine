@@ -44,11 +44,12 @@ public class HID {
 	
 	public HID(String hidInterfaceName_, Vocabulary vocabulary_, ObjectStack objectStack_, String scriptFile_, String languageCode_, Messages messages_) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 		this.setObjectStack(objectStack_);
-		this.setHidInterfaceName("net.rovemonteux.automation.engine.hid."+hidInterfaceName_);
+		this.setHidInterfaceName("cf.monteux.automation.engine.hid."+hidInterfaceName_);
 		this.setScriptFile(scriptFile_);
 		this.setVocabulary(vocabulary_);
 		this.setLanguageCode(languageCode_);
 		this.setMessages(messages_);
+                logger.info("Initializing HID Interface '"+this.getHidInterfaceName()+"'");
 		Class<?> driverClass = Class.forName(this.getHidInterfaceName());
 		Class[] argumentTypes = new Class[] { };
 		this.setStartupMethod(driverClass.getDeclaredMethod("setup"));
