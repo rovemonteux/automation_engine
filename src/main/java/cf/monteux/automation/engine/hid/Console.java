@@ -77,12 +77,8 @@ public class Console implements HIDFactory {
 		if (this.getScriptFile() != null && this.getScriptFile().length() > 0) {
 			try {
 				String[] script = FileIO.read(this.getScriptFile()).split("\n");
-				for (String scriptline: script) {
-                                    logger.debug("Script line: "+scriptline);
-                                }
                                 logger.info(this.getMessages().get("executing_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
 				for (String scriptEntry: script) {
-                                    logger.debug("Processing "+scriptEntry);
                                     processTask(scriptEntry, this.getLanguageCode());
 				}
 				logger.info(this.getMessages().get("executed_script", new Object[]{new File(this.getScriptFile()).getAbsolutePath()}));
@@ -126,17 +122,9 @@ public class Console implements HIDFactory {
 	
 	@Override
 	public void processTask(String currentTask, String language) {
-                logger.debug("Task: "+currentTask+" language "+language);
 		List<ArrayList<String>> results = this.getVocabulary().search(currentTask, language);
-                logger.debug("Results: "+results);
 		ArrayList<String> associatedClass = results.get(0);
-                for (String aclass: associatedClass) {
-                    logger.debug("Associated class: "+aclass);
-                }
 		ArrayList<String> associatedMode = results.get(1);
-                for (String amode: associatedMode) {
-                    logger.debug("Associated mode: "+amode);
-                }
 		if (associatedClass.size() > 0) {
 			for (int i=0; i<associatedMode.size(); i++) {
 				TaskRunner runner = new TaskRunner(new BufferedWriter(this.getConsole().writer()), associatedClass.get(i+1), vocabulary.getVocabularyProperties().get(associatedClass.get(0)), currentTask.split(" "), this.getObjectStack(), associatedMode.get(i), this.getVocabulary(), this.getLanguageCode(), this.getMessages());

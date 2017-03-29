@@ -151,6 +151,7 @@ public class Vocabulary {
 		if (items.size() > 0) {
 			String argument = items.get(0);
 			while (counter < items.size()) {
+                                //logger.debug("Language: "+this.getLanguage().get(language)+" - argument: ["+argument.trim()+"]");
 				if (this.getLanguage().get(language).contains(argument)) {
 					result.add(argument);
 					if (this.getVocabulary().get(argument) != null) {
@@ -161,8 +162,8 @@ public class Vocabulary {
 					}
 					break;
 				} else {
+                                        counter++;
 					argument += " " + items.get(counter).trim();
-					counter++;
 				}
 			}
 			if (result.size() < 2 && items.size() > 1) {
