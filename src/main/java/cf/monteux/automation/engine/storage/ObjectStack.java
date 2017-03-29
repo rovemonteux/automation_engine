@@ -130,6 +130,8 @@ public class ObjectStack {
 			result.append(counter);
 			result.append("] ");
 			result.append(object.getClass());
+                        result.append("\nContents:\n");
+                        result.append(object.toString());
 			counter++;
 		}
 		return result.toString();

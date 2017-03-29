@@ -84,7 +84,6 @@ public class TaskRunner extends Thread {
 		}
                 catch (ClassNotFoundException cnfe) {
                     logger.error("Syntax error: Extension not found in classpath: '"+this.getTaskProperties().get(3)+"."+taskClassName+"'.");
-                    cnfe.printStackTrace();
                 }
 		catch (Exception e) {
                         logger.error(StackTrace.asString(e));
