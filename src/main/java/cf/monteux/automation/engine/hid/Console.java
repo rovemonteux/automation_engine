@@ -34,6 +34,7 @@ import cf.monteux.automation.engine.Vocabulary;
 import cf.monteux.automation.engine.exception.StackTrace;
 import cf.monteux.automation.engine.io.FileIO;
 import cf.monteux.automation.engine.localization.Messages;
+import cf.monteux.automation.engine.net.Host;
 import cf.monteux.automation.engine.storage.ObjectStack;
 import cf.monteux.automation.engine.tasks.TaskRunner;
 
@@ -90,7 +91,7 @@ public class Console implements HIDFactory {
 		}
 		String result = "";
         ConsoleReader reader = new ConsoleReader();
-        reader.setPrompt(System.getProperty("user.name")+"@mae> ");
+        reader.setPrompt(System.getProperty("user.name")+"@"+Host.name()+"> ");
         Collection<String> commands = new LinkedList<String>();
         commands.add("clear");
         commands.add("help");
