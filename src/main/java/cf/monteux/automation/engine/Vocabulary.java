@@ -163,7 +163,11 @@ public class Vocabulary {
 					break;
 				} else {
                                         counter++;
-					argument += " " + items.get(counter).trim();
+                                        try {
+                                            argument += " " + items.get(counter).trim();
+                                        }
+                                        catch (Exception e) {
+                                        }
 				}
 			}
 			if (result.size() < 2 && items.size() > 1) {

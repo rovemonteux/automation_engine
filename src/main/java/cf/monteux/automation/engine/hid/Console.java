@@ -134,7 +134,6 @@ public class Console implements HIDFactory {
 		}
 		else {
 			logger.error(this.getMessages().get("syntax_error", new Object[]{currentTask}));
-                        logger.error("Error running console");
 		}
 		associatedClass = null;
 		associatedMode = null;
