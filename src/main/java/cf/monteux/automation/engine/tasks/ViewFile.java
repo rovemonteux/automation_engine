@@ -60,7 +60,7 @@ public class ViewFile extends TaskFactory {
 	}
 	
 	public String viewFile(String[] args) {
-		if (args.length > 2) {
+		if (args.length > 1) {
 			try {
 				return FileIO.read(args[args.length-1]);
 			} catch (FileNotFoundException e) {
@@ -70,7 +70,7 @@ public class ViewFile extends TaskFactory {
 			}
 		}
 		else {
-			logger.error("Please specify a file to be viewed.");
+			logger.error("Please specify a file to be displayed.");
 			return null;
 		}
 	}

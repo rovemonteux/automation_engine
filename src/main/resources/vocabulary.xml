@@ -105,10 +105,18 @@
 </term>
 <term>
 <language>en</language>
-<value>view file</value>
+<value>cat</value>
 <task mode="print">ViewFile</task>
 <threaded>false</threaded>
-<description>Views a given file</description>
+<description>Displays the contents of a given file</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>show</value>
+<task mode="print">ViewFile</task>
+<threaded>false</threaded>
+<description>Displays the contents of a given file</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
