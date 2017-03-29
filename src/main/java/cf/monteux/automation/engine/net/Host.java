@@ -27,13 +27,19 @@ import java.net.UnknownHostException;
 public class Host {
 
     public static String name() {
-        String name = "mae";
+        String name = "";
         try {
             InetAddress addr;
             addr = InetAddress.getLocalHost();
             name = addr.getHostName();
         } catch (UnknownHostException ex) {
-            ex.printStackTrace();
+            name = System.getenv("HOSTNAME");
+            if (name == null || name.length() < 1) {
+                name = System.getenv("COMPUTERNAME");
+            }
+            if (name == null || name.length() < 1) {
+                name = "mae";
+            }
         }
         return name;
     }
