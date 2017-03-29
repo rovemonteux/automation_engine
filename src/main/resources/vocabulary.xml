@@ -58,14 +58,6 @@
 </term>
 <term>
 <language>en</language>
-<value>stack</value>
-<task mode="print">ListStack</task>
-<threaded>false</threaded>
-<description>Displays the contents of the object stack</description>
-<package>cf.monteux.automation.engine.tasks</package>
-</term>
-<term>
-<language>en</language>
 <value>stack demo</value>
 <task mode="run">EmptyStack</task>
 <task mode="print">ListStack</task>
@@ -137,7 +129,7 @@
 </term>
 <term>
 <language>en</language>
-<value>stack file</value>
+<value>load file</value>
 <task mode="stack">ViewFile</task>
 <threaded>false</threaded>
 <description>Loads a file into the Stack</description>
@@ -205,6 +197,14 @@
 <task mode="run">CreateFile</task>
 <threaded>false</threaded>
 <description>Creates a given file using the first object in the Stack as content</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>stack</value>
+<task mode="print">ListStack</task>
+<threaded>false</threaded>
+<description>Displays the contents of the object stack</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 </vocabulary>

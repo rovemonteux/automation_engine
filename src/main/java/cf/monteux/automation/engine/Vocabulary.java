@@ -147,10 +147,10 @@ public class Vocabulary {
 		for (String item : arguments.split(" ")) {
 			items.add(item);
 		}
-		int counter = 0;
+		int counter = items.size()-1;
 		if (items.size() > 0) {
-			String argument = items.get(0);
-			while (counter < items.size()) {
+			String argument = items.get(counter);
+			while (counter > -1) {
                                 //logger.debug("Language: "+this.getLanguage().get(language)+" - argument: ["+argument.trim()+"]");
 				if (this.getLanguage().get(language).contains(argument)) {
 					result.add(argument);
@@ -162,7 +162,7 @@ public class Vocabulary {
 					}
 					break;
 				} else {
-                                        counter++;
+                                        counter--;
                                         try {
                                             argument += " " + items.get(counter).trim();
                                         }
