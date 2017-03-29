@@ -17,6 +17,8 @@
  */
 package cf.monteux.automation.engine.net;
 
+import cf.monteux.automation.engine.io.ExecIO;
+import cf.monteux.automation.engine.io.FileIO;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -36,6 +38,18 @@ public class Host {
             name = System.getenv("HOSTNAME");
             if (name == null || name.length() < 1) {
                 name = System.getenv("COMPUTERNAME");
+            }
+            if (name == null || name.length() < 1) {
+                try {
+                    name = FileIO.read("/etc/hostname");
+                }
+                catch (Exception e) {
+                    try {
+                        ExecIO.read("hostname");
+                    }
+                    catch (Exception ignore) {
+                    }
+                }
             }
             if (name == null || name.length() < 1) {
                 name = "mae";
