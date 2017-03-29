@@ -45,7 +45,7 @@ public class Host {
                 }
                 catch (Exception e) {
                     try {
-                        ExecIO.read("hostname");
+                        name = ExecIO.read("hostname");
                     }
                     catch (Exception ignore) {
                     }
