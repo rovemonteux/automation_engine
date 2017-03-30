@@ -75,7 +75,7 @@ public class ChangeCurrentPath extends TaskFactory {
         }
     }
 
-    public boolean setCurrentDirectory(String folderName) {
+    public static boolean setCurrentDirectory(String folderName) {
         Boolean result = false;
         File directory = new File(folderName).getAbsoluteFile();
         if (directory.exists() || directory.mkdirs()) {
