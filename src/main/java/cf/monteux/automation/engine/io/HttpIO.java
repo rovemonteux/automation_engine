@@ -21,6 +21,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.net.URL;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -28,6 +30,8 @@ import java.net.URL;
  */
 public class HttpIO {
 
+    private static final Logger logger = LogManager.getLogger("ViewFile");
+    
     public static String download(String endpoint, String destination) {
         BufferedOutputStream output = null;
         try {
@@ -45,7 +49,7 @@ public class HttpIO {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getClass().toString().replace("class ","")+": "+e.getMessage());
             return "";
         } finally {
             if (output != null) {

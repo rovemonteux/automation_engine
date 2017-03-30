@@ -26,6 +26,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cf.monteux.automation.engine.Vocabulary;
+import cf.monteux.automation.engine.exception.ExceptionFormatter;
 import cf.monteux.automation.engine.exception.StackTrace;
 import cf.monteux.automation.engine.localization.Messages;
 import cf.monteux.automation.engine.storage.ObjectStack;
@@ -86,7 +87,7 @@ public class TaskRunner extends Thread {
                     logger.error("Syntax error: Extension not found in classpath: '"+this.getTaskProperties().get(3)+"."+taskClassName+"'.");
                 }
 		catch (Exception e) {
-                    logger.error("Error running the task: "+e.getMessage());
+                    logger.error(ExceptionFormatter.format(e, "Error running the task: "));
                     logger.error(StackTrace.asString(e));
 		}
 	}
