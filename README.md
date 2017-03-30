@@ -5,7 +5,11 @@
 
 **Monteux Automation Engine** is a GPLed framework for Java SE 7 or newer that implements a Lego(tm)-like modular, plug and play Automation Framework with a localized built-in shell and script interpreter.
 
-The automation is based on **tasks lists** and **object stacks**, interacting with the environment via **HIDs**. 
+All commands are **multi platform**, including folder paths. Meaning, a command 'cd /users', will change the current working directory to '/users/' in Linux/BSD/OSX, and to 'C:\Users\' in Windows.
+
+All libraries are also **multi platform**, meaning a task that sends e-mail, or selects data from a database, will run in the exact same way on both Linux/BSD/OSX and Windows.
+
+The automation is based on **tasks lists** and **object stacks**, interacting with the environment via **HIDs** (Human Interaction Devices). 
 
 **Tasks** are classes described in custom **vocabularies**, with three entry points: **run**, **stack** and **print**.
 
