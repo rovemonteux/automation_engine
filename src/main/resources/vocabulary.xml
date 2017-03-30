@@ -236,7 +236,7 @@
 <value>pwd</value>
 <task mode="print">CurrentPath</task>
 <threaded>false</threaded>
-<description>Displays the current workinf directory</description>
+<description>Displays the current working directory</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
@@ -244,7 +244,7 @@
 <value>show current path</value>
 <task mode="print">CurrentPath</task>
 <threaded>false</threaded>
-<description>Displays the current workinf directory</description>
+<description>Displays the current working directory</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
@@ -252,7 +252,31 @@
 <value>stack current path</value>
 <task mode="stack">CurrentPath</task>
 <threaded>false</threaded>
-<description>Displays the current workinf directory</description>
+<description>Displays the current working directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>cd</value>
+<task mode="print">ChangeCurrentPath</task>
+<threaded>false</threaded>
+<description>Changes the current working directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>change current path</value>
+<task mode="print">ChangeCurrentPath</task>
+<threaded>false</threaded>
+<description>Changes the current working directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>stack change current path</value>
+<task mode="stack">ChangeCurrentPath</task>
+<threaded>false</threaded>
+<description>Changes the current working directory and stores its path in the object stack</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 </vocabulary>
