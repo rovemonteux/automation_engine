@@ -17,6 +17,7 @@
  */
 package cf.monteux.automation.engine.io;
 
+import cf.monteux.automation.engine.exception.ExceptionFormatter;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -37,7 +38,7 @@ public class HttpIO {
         try {
             URL url = new URL(endpoint);
             BufferedInputStream input = new BufferedInputStream(url.openStream());
-            output = new BufferedOutputStream(new FileOutputStream("test.html"));
+            output = new BufferedOutputStream(new FileOutputStream(destination));
             byte[] buf = new byte[8192];
             int bytesread = 0, bytesBuffered = 0;
             while ((bytesread = input.read(buf)) > -1) {
@@ -48,8 +49,9 @@ public class HttpIO {
                     output.flush();
                 }
             }
+            logger.info(endpoint+" has been successfully downloaded.");
         } catch (Exception e) {
-            logger.error(e.getClass().toString().replace("class ","")+": "+e.getMessage());
+            logger.error(ExceptionFormatter.format(e, ""));
             return "";
         } finally {
             if (output != null) {
