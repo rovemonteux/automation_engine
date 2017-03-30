@@ -57,6 +57,7 @@ public class HttpIO {
             if (output != null) {
                 try {
                     output.flush();
+                    output.close();
                 } catch (Exception e) {
                 }
             }
