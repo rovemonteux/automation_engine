@@ -193,10 +193,18 @@
 </term>
 <term>
 <language>en</language>
+<value>fs</value>
+<task mode="run">FileSize</task>
+<threaded>false</threaded>
+<description>Gets the size of a given file in bytes</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
 <value>file size</value>
 <task mode="run">FileSize</task>
 <threaded>false</threaded>
-<description>Gets the size of a given file</description>
+<description>Gets the size of a given file in bytes</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
 <term>
