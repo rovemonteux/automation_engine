@@ -48,13 +48,11 @@ public class CopyFile extends TaskFactory {
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
 		if (copyFile(args)) {
-			output.write(this.getMessages().get("copy_file_successful", new Object[]{args[args.length-2], args[args.length-1]}));
+			logger.info(this.getMessages().get("copy_file_successful", new Object[]{args[args.length-2], args[args.length-1]}));
 		}
 		else {
-			output.write(this.getMessages().get("copy_file_error", new Object[]{args[args.length-2], args[args.length-1]}));
+			logger.info(this.getMessages().get("copy_file_error", new Object[]{args[args.length-2], args[args.length-1]}));
 		}
-		output.write(String.format("%n"));
-		output.flush();
 	}
 	
 	@Override

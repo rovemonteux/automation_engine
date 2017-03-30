@@ -49,8 +49,7 @@ public class ListFiles extends TaskFactory {
 
 	@Override
 	public void print(BufferedWriter output, String[] args, String description) throws IOException {
-		output.write(list(args));
-		output.flush();
+		logger.info(list(args));
 	}
 
 	@Override
@@ -70,7 +69,11 @@ public class ListFiles extends TaskFactory {
 		if (args.length > 2) {
 			folder = args[args.length-1];
 		}
-		logger.debug("Listing folder "+folder);
+                String fullFile = new File(folder).getAbsolutePath();
+                if (fullFile.endsWith(".")) {
+                    fullFile = fullFile.replaceFirst(".$","");
+                }
+		logger.info("Listing folder "+fullFile);
 		for (File file: FileIO.listFiles(folder)) {
 			result.append(file.getName());
 			result.append(String.format("%n"));
