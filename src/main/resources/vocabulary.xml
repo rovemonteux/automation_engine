@@ -231,4 +231,28 @@
 <description>Creates a given file using the first object in the Stack as content</description>
 <package>cf.monteux.automation.engine.tasks</package>
 </term>
+<term>
+<language>en</language>
+<value>pwd</value>
+<task mode="print">CurrentPath</task>
+<threaded>false</threaded>
+<description>Displays the current workinf directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>show current path</value>
+<task mode="print">CurrentPath</task>
+<threaded>false</threaded>
+<description>Displays the current workinf directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
+<term>
+<language>en</language>
+<value>stack current path</value>
+<task mode="stack">CurrentPath</task>
+<threaded>false</threaded>
+<description>Displays the current workinf directory</description>
+<package>cf.monteux.automation.engine.tasks</package>
+</term>
 </vocabulary>
