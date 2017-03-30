@@ -66,15 +66,14 @@ public class ListFiles extends TaskFactory {
 	public String list(String[] args) {
 		StringBuilder result = new StringBuilder();
 		String folder = ".";
-		if (args.length > 2) {
+		if (args.length > 1) {
 			folder = args[args.length-1];
 		}
                 String fullFile = new File(folder).getAbsolutePath();
                 if (fullFile.endsWith(".")) {
                     fullFile = fullFile.replaceFirst(".$","");
                 }
-		logger.info("Listing folder "+fullFile);
-		for (File file: FileIO.listFiles(folder)) {
+		for (File file: FileIO.listFiles(fullFile)) {
 			result.append(file.getName());
 			result.append(String.format("%n"));
 		}
