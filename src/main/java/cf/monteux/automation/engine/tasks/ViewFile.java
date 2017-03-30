@@ -59,7 +59,7 @@ public class ViewFile extends TaskFactory {
 		this.getObjectStack().add(viewFile(args));
 	}
 	
-	public String viewFile(String[] args) {
+	public String viewFile(String[] args) throws IOException {
 		if (args.length > 1) {
 			try {
 				return FileIO.read(args[args.length-1]);

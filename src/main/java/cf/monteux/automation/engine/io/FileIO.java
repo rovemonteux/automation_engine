@@ -20,12 +20,14 @@ package cf.monteux.automation.engine.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -33,6 +35,7 @@ import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -50,20 +53,21 @@ public class FileIO {
 	 * 
 	 * @param filename	The file to read from
 	 * @return	The String-encapsulated file contents
-	 * @throws FileNotFoundException	An error indicating that the files does not exists
+	 * @throws FileNotFoundException    An exception indicating that the files does not exists
+         * @throws IOException   An exception indicating that an error occurred while reading the file
 	 * 
-	 * @see File
-	 * @see Scanner
 	 */
-    public static String read(String filename) throws FileNotFoundException {
-    	File file = new File(filename);
-        Scanner scanner = new Scanner(file);
-        scanner.useDelimiter("\\Z");
-        String result = scanner.next();
-        scanner.close();
-        scanner = null;
-        file = null;
-        return result;
+    public static String read(String filename) throws FileNotFoundException, IOException {
+        StringBuilder result = new StringBuilder();
+        FileReader fileReader = new FileReader(filename);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String currentLine;
+        while ((currentLine = bufferedReader.readLine()) != null) {
+            result.append(currentLine);
+	}
+        bufferedReader.close();
+        fileReader.close();
+        return result.toString();
     }
 
     /**
