@@ -19,7 +19,6 @@
 package cf.monteux.automation.engine.tasks;
 
 import cf.monteux.automation.engine.Vocabulary;
-import cf.monteux.automation.engine.library.os.Environment;
 import cf.monteux.automation.engine.localization.Messages;
 import cf.monteux.automation.engine.storage.ObjectStack;
 import java.io.BufferedWriter;
@@ -49,19 +48,17 @@ public class CurrentPath extends TaskFactory {
 	@Override
 	public void print(BufferedWriter output, String[] args, String description)
 			throws IOException {
-		output.write(currentPath());
-		output.newLine();
-		output.flush();
+		logger.info("Current path: "+path());
 	}
 
 	@Override
 	public void stack(BufferedWriter output, String[] args, String description)
 			throws IOException {
-		this.getObjectStack().add(currentPath());
-                logger.info("Stored the current working directory "+currentPath()+" into the object stack.");
+		this.getObjectStack().add(path());
+                logger.info("Stored the current working directory "+path()+" into the object stack.");
 	}
         
-        public String currentPath() {
+        public static String path() {
             return Paths.get("").toAbsolutePath().toString();
         }
 
