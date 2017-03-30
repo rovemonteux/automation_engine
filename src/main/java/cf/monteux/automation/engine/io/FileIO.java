@@ -20,23 +20,23 @@ package cf.monteux.automation.engine.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,19 +55,11 @@ public class FileIO {
 	 * @return	The String-encapsulated file contents
 	 * @throws FileNotFoundException    An exception indicating that the files does not exists
          * @throws IOException   An exception indicating that an error occurred while reading the file
+         * @throws URISyntaxException   An exception indicating an error in the filename
 	 * 
 	 */
-    public static String read(String filename) throws FileNotFoundException, IOException {
-        StringBuilder result = new StringBuilder();
-        FileReader fileReader = new FileReader(filename);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String currentLine;
-        while ((currentLine = bufferedReader.readLine()) != null) {
-            result.append(currentLine);
-	}
-        bufferedReader.close();
-        fileReader.close();
-        return result.toString();
+    public static String read(String filename) throws FileNotFoundException, IOException, URISyntaxException {
+        return new String(Files.readAllBytes(Paths.get(new File(filename).toURI())));
     }
 
     /**
@@ -272,7 +264,7 @@ public class FileIO {
      * @param destinationFolderPath	The destination folder path
      * @throws IOException	An input and output error
      */
-    public static void copyFolderRecursively(String sourceFolderPath, String destinationFolderPath) throws IOException {
+    public static void copyFolderRecursively(String sourceFolderPath, String destinationFolderPath) throws IOException, URISyntaxException {
         File file = new File(sourceFolderPath);
         if (!file.isDirectory()) return;
         if (!destinationFolderPath.endsWith(File.separator)) destinationFolderPath += File.separator;
@@ -363,7 +355,7 @@ public class FileIO {
      * @throws FileNotFoundException	Error when the file has not been found
      * @throws IOException	Error while reading the file
      */
-    public static String read(String path, String filename) throws FileNotFoundException, IOException {
+    public static String read(String path, String filename) throws FileNotFoundException, IOException, URISyntaxException {
         if (path != null && path.length() > 0) {
         	if (!(filename.contains(path))) {
         		filename = path + filename;

@@ -29,6 +29,7 @@ import cf.monteux.automation.engine.Vocabulary;
 import cf.monteux.automation.engine.io.FileIO;
 import cf.monteux.automation.engine.localization.Messages;
 import cf.monteux.automation.engine.storage.ObjectStack;
+import java.net.URISyntaxException;
 
 /**
  * Displays a given file.
@@ -42,24 +43,23 @@ public class ViewFile extends TaskFactory {
 	}
 	
 	@Override
-	public void run(BufferedWriter output, String[] args, String description) throws IOException {
+	public void run(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		print(output, args, description);
 		stack(output, args, description);
 	}
 	
 	@Override
-	public void print(BufferedWriter output, String[] args, String description) throws IOException {
+	public void print(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		output.write(viewFile(args));
-		output.write(String.format("%n"));
 		output.flush();
 	}
 
 	@Override
-	public void stack(BufferedWriter output, String[] args, String description) throws IOException {
+	public void stack(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		this.getObjectStack().add(viewFile(args));
 	}
 	
-	public String viewFile(String[] args) throws IOException {
+	public String viewFile(String[] args) throws IOException, URISyntaxException {
 		if (args.length > 1) {
 			try {
 				return FileIO.read(args[args.length-1]);

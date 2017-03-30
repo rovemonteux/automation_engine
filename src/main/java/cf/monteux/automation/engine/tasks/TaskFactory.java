@@ -24,6 +24,7 @@ import java.io.IOException;
 import cf.monteux.automation.engine.Vocabulary;
 import cf.monteux.automation.engine.localization.Messages;
 import cf.monteux.automation.engine.storage.ObjectStack;
+import java.net.URISyntaxException;
 
 public abstract class TaskFactory {
 
@@ -45,9 +46,10 @@ public abstract class TaskFactory {
 	 * @param output	Output stream
 	 * @param args	Extra arguments to the Task
 	 * @param description	Task description
-	 * @throws IOException	Error on input and output
+	 * @throws IOException	Exception indicating an error on input and output
+         * @throws URISyntaxException   Exception indicating an error in an URI
 	 */
-	public void run(BufferedWriter output, String[] args, String description) throws IOException {
+	public void run(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		
 	}
 	
@@ -57,9 +59,10 @@ public abstract class TaskFactory {
 	 * @param output	Output stream
 	 * @param args	Extra arguments to the Task
 	 * @param description	Task description
-	 * @throws IOException	Error on input and output
+	 * @throws IOException	Exception indicating an error on input and output
+         * @throws URISyntaxException   Exception indicating an error in an URI
 	 */
-	public void print(BufferedWriter output, String[] args, String description) throws IOException {
+	public void print(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		
 	}
 	
@@ -69,9 +72,10 @@ public abstract class TaskFactory {
 	 * @param output	Output stream
 	 * @param args	Extra arguments to the Task
 	 * @param description	Task description
-	 * @throws IOException	Error on input and output
+	 * @throws IOException	Exception indicating an error on input and output
+         * @throws URISyntaxException   Exception indicating an error in an URI
 	 */
-	public void stack(BufferedWriter output, String[] args, String description) throws IOException {
+	public void stack(BufferedWriter output, String[] args, String description) throws IOException, URISyntaxException {
 		
 	}
 	
