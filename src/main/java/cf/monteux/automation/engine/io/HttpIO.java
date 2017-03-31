@@ -20,6 +20,7 @@ package cf.monteux.automation.engine.io;
 import cf.monteux.automation.engine.exception.ExceptionFormatter;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
 import org.apache.logging.log4j.LogManager;
@@ -38,7 +39,8 @@ public class HttpIO {
         try {
             URL url = new URL(endpoint);
             BufferedInputStream input = new BufferedInputStream(url.openStream());
-            output = new BufferedOutputStream(new FileOutputStream(destination));
+            File file = new File(destination);
+            output = new BufferedOutputStream(new FileOutputStream(file.getAbsolutePath().toString()));
             byte[] buf = new byte[8192];
             int bytesread = 0, bytesBuffered = 0;
             while ((bytesread = input.read(buf)) > -1) {
