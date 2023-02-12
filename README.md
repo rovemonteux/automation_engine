@@ -176,7 +176,7 @@ An example **extension** is the Empty Stack one, which clears the **object stack
 Author
 ======
 
-* [Rove Monteux] - <http://monteux.cf/>, <https://www.linkedin.com/in/rovemonteux>
+* [Rove Monteux] - <https://www.linkedin.com/in/rovemonteux>
 
 License
 =======
